@@ -1,0 +1,7 @@
+<h1><%= @user.name %></h1>
+<h1><%= @user.age %></h1>
+<h1><%= @user.sex %></h1>
+<% if @user.id == current_user.id %>
+	<h1>編集する</h1>
+	<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+<% end %>
