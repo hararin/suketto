@@ -1,0 +1,14 @@
+<%= form_with model: @user, url: users_customer_path(@user) do |f| %>
+	<div>
+	    <%= f.text_field :name, :placeholder => "名前" %>
+	</div>
+
+	<div>
+		<%= f.text_field :sex, :placeholder => "性別" %>
+ 	</div>
+
+	<div>
+	    <%= f.text_field :age, :placeholder => "年齢" %>
+	</div>
+	<%= f.submit "更新する" %>
+<% end %>
