@@ -1,0 +1,33 @@
+<%= form_with model: @request, url: users_requests_path, method: :post do |f| %>
+	<div>
+		<%= f.text_field :title, :placeholder => "タイトル" %>
+	</div>
+	<div>
+		<%= f.text_field :event, :placeholder => "イベント名" %>
+	</div>
+	<div>
+		<%= f.text_area :content, :placeholder => "詳細" %>
+	</div>
+	<div class="form-group">
+        <div class="input-group date" id="datetime" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" data-target="#datetime"/>
+                <div class="input-group-append" data-target="#datetime" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+	<div>
+		<%= f.text_field :address, :placeholder => "場所" %>
+	</div>
+	<div>
+		<%= f.text_field :capacity, :placeholder => "募集人数" %>
+	</div>
+	<div>
+		<%= f.submit "依頼する" %>
+	</div>
+<% end %>
+<script type="text/javascript">
+    $(function () {
+        $('#datetime').datetimepicker();
+    });
+</script>

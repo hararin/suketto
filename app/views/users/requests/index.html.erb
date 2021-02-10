@@ -1,0 +1,10 @@
+<div>
+	<% @requests.each do |request| %>
+		<%= link_to users_request_path(request) do %>
+			<div>
+				<%= request.title %>
+				<%= request.content %>
+			</div>
+		<% end %>
+	<% end %>
+</div>

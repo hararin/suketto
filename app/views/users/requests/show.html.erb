@@ -1,0 +1,64 @@
+<h1><%= @request.user.name %></h1>
+<h1><%= @request.title %></h1>
+<h1><%= @request.event %></h1>
+<h1><%= @request.content %></h1>
+<h1><%= @request.datetime %></h1>
+<h1><%= @request.address %></h1>
+
+<script type="text/javascript">
+  function initMap() {
+// latitude、longitudeから位置を特定
+    var test ={lat: <%= @request.latitude %>, lng: <%= @request.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 15,
+              center: test
+              });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = '住所：<%= @request.address %>';
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+//Map上の指定した位置にピンを挿して表示する
+    var marker = new google.maps.Marker({
+                  position:test,
+                  map: map,
+                  title: contentString
+                 });
+
+     marker.addListener('click', function() {
+       infowindow.open(map, marker);
+     });
+  }
+</script>
+
+<!-- 以下の記述の中にあるYOUR_API_KEYには取得したご自身のAPIキーを記述してください -->
+<script async defer
+              src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAzOoOIk2dKXLOvrab2OalNidBJTOE0ob0&callback=initMap">
+</script>
+<!-- 表示するmapのcssです。ご自身でカスタマイズしてください。高さが設定されていないと表示されないことがあります。 -->
+<style type="text/css">
+  #map { height: 200px;
+         width: 70%;}
+</style>
+
+<!-- mapの表示 -->
+<div id="map"></div>
+
+
+
+
+<h1><%= @request.participants.count %> / <%= @request.capacity %></h1>
+<% if @request.user.id == current_user.id %>
+	<%= link_to "編集する", edit_users_request_path %>
+	<%= link_to "削除する", users_request_path, method: :delete %>
+<% else %>
+	<% if @request.participants.exists?(user_id: current_user.id) %>
+		<p>助っ人登録済みです</p>
+		<p>キャンセルする方は<%= link_to "こちら", users_request_participant_path(@request, @request.participants), method: :delete %>をクリック</p>
+	<% else %>
+		<%= link_to "助っ人になる", users_request_participants_path(@request), method: :post %>
+	<% end %>
+<% end %>

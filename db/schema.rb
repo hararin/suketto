@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_102816) do
+ActiveRecord::Schema.define(version: 2021_02_10_012159) do
+
+  create_table "participants", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "request_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "requests", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "event", null: false
-    t.datetime "datetime", null: false
+    t.string "datetime", null: false
     t.string "address", null: false
     t.float "latitude"
     t.float "longitude"

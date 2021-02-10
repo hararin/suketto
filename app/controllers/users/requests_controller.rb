@@ -10,22 +10,39 @@ class Users::RequestsController < ApplicationController
 
 	def create
 		@request = current_user.requests.new(request_params)
-		@request.save
+		if @request.save
+			redirect_to users_requests_path
+		else
+			render :new
+		end
 	end
 
 	def show
-		
+		@request = Request.find(params[:id])
 	end
 
 	def edit
-		
+		@request = Request.find(params[:id])
 	end
 
 	def update
-		
+		@request = Request.find(params[:id])
+		if @request.update(request_params)
+			redirect_to users_request_path(@request)
+		else
+			render :edit
+		end
 	end
 
 	def destroy
-		
+		@request = Request.find(params[:id])
+		@request.destroy
+		redirect_to users_requests_path
+	end
+
+	private
+
+	def request_params
+		params.require(:request).permit(:event, :datetime, :address, :title, :content, :capacity)
 	end
 end

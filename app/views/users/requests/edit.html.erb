@@ -1,0 +1,23 @@
+<%= form_with model: @request, url: users_request_path do |f| %>
+	<div>
+		<%= f.text_field :title, :placeholder => "タイトル" %>
+	</div>
+	<div>
+		<%= f.text_field :event, :placeholder => "イベント名" %>
+	</div>
+	<div>
+		<%= f.text_area :content, :placeholder => "詳細" %>
+	</div>
+	<div>
+		<%= f.text_field :datetime, :placeholder => "日時" %>
+	</div>
+	<div>
+		<%= f.text_field :address, :placeholder => "場所" %>
+	</div>
+	<div>
+		<%= f.text_field :capacity, :placeholder => "募集人数" %>
+	</div>
+	<div>
+		<%= f.submit "更新する" %>
+	</div>
+<% end %>

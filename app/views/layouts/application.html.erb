@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <%= link_to "マイページ", users_customer_path(current_user) %>
+    <%= link_to "助っ人依頼一覧", users_requests_path %>
     <%= yield %>
   </body>
 </html>
