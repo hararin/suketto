@@ -19,6 +19,9 @@ class Users::RequestsController < ApplicationController
 
 	def show
 		@request = Request.find(params[:id])
+		@participants = @request.participants.all
+		@participant = Participant.find_by(request_id: @request.id,
+										   user_id: current_user.id)
 	end
 
 	def edit

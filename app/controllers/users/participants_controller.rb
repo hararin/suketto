@@ -7,14 +7,14 @@ class Users::ParticipantsController < ApplicationController
 		if @request.capacity > @request.participants.count
 			@participant.save
 		else
-			redirect_to users_request_path(@request)
 		end
+		redirect_to users_request_path(@request)
 	end
 
 	def destroy
 		@participant = Participant.find_by(request_id: params[:request_id],
 										   id: params[:id])
 		@participant.destroy
-		redirect_to users_requests_path
+		redirect_to users_request_path(@participant.request)
 	end
 end

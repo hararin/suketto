@@ -6,8 +6,10 @@ class Users::CustomersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@participant = Participant.find_by(user_id: current_user.id)
-		@requests = Request.where(id: @participant.request_id)
+		@participants = Participant.where(user_id: current_user.id)
+		@participants.each do |participant|
+			@requests = participant.request
+		end
 	end
 
 	def edit

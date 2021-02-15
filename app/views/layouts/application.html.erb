@@ -4,14 +4,49 @@
     <title>Suketto</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= link_to "マイページ", users_customer_path(current_user) %>
-    <%= link_to "助っ人依頼一覧", users_requests_path %>
+    <div>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Suketto</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">ホーム<span class="sr-only">(current)</span></a>
+            </li>
+            <% if current_user %>
+              <li class="nav-item">
+                <%= link_to "マイページ", users_customer_path(current_user), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">助っ人依頼</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <%= link_to "依頼一覧", users_requests_path, class: "dropdown-item" %><br>
+                  <%= link_to "依頼投稿", new_users_request_path, class: "dropdown-item" %><br>
+                </div>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
     <%= yield %>
   </body>
 </html>

@@ -1,3 +1,38 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.top {
+	margin-top: 150px;
+}
+
+div {
+	text-align: center;
+}
+
+.explanation {
+	margin : 0;
+}
+
+.container {
+	h2 {
+	margin-bottom: 40px;
+	font-weight: bold;
+	}
+}
+
+.img-box1 {
+	height: 250px;
+	background-image: url(3221923_s.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-bottom: 20px;
+}
+
+.img-box2 {
+	height: 250px;
+	background-image: url(1683130_s.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-bottom: 20px;
+}

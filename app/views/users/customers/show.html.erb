@@ -4,8 +4,7 @@
 <% if @user.id == current_user.id %>
 	<h1>助っ人予定のイベント</h1>
 	<% @requests.each do |request| %>
-		<%= link_to request.title, users_request_path(request) %>
+		<%= link_to request.id, users_request_path(request) %>
 	<% end %>
-	<h1><%= link_to "編集する", edit_users_customer_path(@user) %></h1>
-	<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+	<p><%= link_to "編集する", edit_users_customer_path(@user) %></p>
 <% end %>

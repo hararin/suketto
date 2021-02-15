@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   }
 
   get '/' => 'home#top'
+  get '/about' => 'home#about'
 
   namespace :users do
   	resources :customers, except:[:new, :create]

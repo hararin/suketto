@@ -1,9 +1,76 @@
-<h1><%= @request.user.name %></h1>
-<h1><%= @request.title %></h1>
-<h1><%= @request.event %></h1>
-<h1><%= @request.content %></h1>
-<h1><%= @request.datetime %></h1>
-<h1><%= @request.address %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-7 col-lg-6 offset-lg-1">
+      <div>
+        <h2><%= @request.title %></h2>
+        <p><%= @request.content %></p>
+      </div>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>依頼者</th>
+            <td><%= link_to @request.user.name, users_customer_path(@request.user) %></td>
+          </tr>
+          <tr>
+            <th>日程</th>
+            <td><%= @request.datetime %></td>
+          </tr>
+          <tr>
+            <th>開催場所</th>
+            <td>
+              <p><%= @request.address %></p>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
+            <td>
+              <div id="map"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>募集人数</th>
+            <td><%= @request.capacity %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-12 col-md-5 col-lg-4">
+      <p>助っ人一覧</p>
+      <% if @request.participants.exists? == false %>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>助っ人はいません</td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+      <table class="table table-bordered">
+        <% @num = 1 %>
+        <tbody>
+          <% @participants.each do |participant| %>
+            <tr>
+              <th><%= @num %></th>
+              <td><%= participant.user.name %></td>
+            </tr>
+            <% @num = @num + 1 %>
+          <% end %>
+        </tbody>
+      </table>
+      <% if @request.user.id != current_user.id %>
+          <% if @request.participants.exists?(user_id: current_user.id) %>
+            <%= link_to "キャンセルする", users_request_participant_path(@request, @participant), method: :delete, class: "btn btn-danger" %>
+          <% else %>
+            <% if @request.capacity > @request.participants.count %>
+              <%= link_to "助っ人になる", users_request_participants_path(@request), method: :post, class: "btn btn-info" %>
+            <% else %>
+              <p>定員に達しました。</p>
+            <% end %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
   function initMap() {
@@ -41,24 +108,12 @@
 <!-- 表示するmapのcssです。ご自身でカスタマイズしてください。高さが設定されていないと表示されないことがあります。 -->
 <style type="text/css">
   #map { height: 200px;
-         width: 70%;}
+         width: 100%;}
 </style>
 
 <!-- mapの表示 -->
-<div id="map"></div>
-
-
-
-
-<h1><%= @request.participants.count %> / <%= @request.capacity %></h1>
 <% if @request.user.id == current_user.id %>
 	<%= link_to "編集する", edit_users_request_path %>
 	<%= link_to "削除する", users_request_path, method: :delete %>
 <% else %>
-	<% if @request.participants.exists?(user_id: current_user.id) %>
-		<p>助っ人登録済みです</p>
-		<p>キャンセルする方は<%= link_to "こちら", users_request_participant_path(@request, @request.participants), method: :delete %>をクリック</p>
-	<% else %>
-		<%= link_to "助っ人になる", users_request_participants_path(@request), method: :post %>
-	<% end %>
 <% end %>

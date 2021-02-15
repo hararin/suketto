@@ -1,35 +1,49 @@
-<h2>会員登録</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div>
-    <%= f.text_field :name, :placeholder => "名前" %>
+<div class="row signup-form">
+  <div class="col-sm-8 col-md-6 col-lg-6 offset-sm-2 offset-md-3 offset-lg-3">
+    <h2>ユーザー登録</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="form-group row">
+        <%= f.label :"名前", class: "col-3 col-form-label" %>
+        <div class="col-9">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :"年齢", class: "col-3 col-form-label" %>
+        <div class="col-3">
+          <%= f.text_field :age, class: "form-control" %>
+        </div>
+        <%= f.label :"性別", class: "col-3 col-form-label" %>
+        <div class="col-3">
+          <%= f.text_field :sex, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :"Eメール", class: "col-3 col-form-label" %>
+        <div class="col-9">
+          <%= f.text_field :email, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :"パスワード", class: "col-3 col-form-label" %>
+        <div class="col-9">
+          <%= f.password_field :password, class: "form-control",autocomplete: "new-password", :placeholder => "６文字以上の半角英数字" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :"パスワード", class: "col-3 col-form-label" %>
+        <div class="col-9">
+          <%= f.password_field :password_confirmation, class: "form-control",autocomplete: "new-password", :placeholder => "確認用" %>
+        </div>
+      </div>
+      <div class="actions">
+        <%= f.submit "登録", class: "btn btn-primary", style: "width: 100%;" %>
+      </div>
+    <% end %>
+    <hr class="my-4">
+    <p>ユーザーの方はこちら</p>
+    <%= link_to "ログイン", new_user_session_path, class: "btn btn-success", style: "width: 40%;" %>
   </div>
+</div>
 
-  <div>
-    <%= f.text_field :sex, :placeholder => "性別" %>
-  </div>
-
-  <div>
-    <%= f.text_field :age, :placeholder => "年齢" %>
-  </div>
-
-  <div>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "メールアドレス" %>
-  </div>
-
-  <div>
-    <%= f.password_field :password, autocomplete: "new-password", :placeholder => "パスワード（６文字以上）" %>
-  </div>
-
-  <div class="field">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "パスワード（確認用）" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "会員登録" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
