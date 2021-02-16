@@ -1,10 +1,21 @@
-<div>
-	<% @requests.each do |request| %>
-		<%= link_to users_request_path(request) do %>
-			<div>
-				<%= request.title %>
-				<%= request.content %>
-			</div>
-		<% end %>
-	<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<% @requests.each do |request| %>
+				<%= link_to users_request_path(request) do %>
+					<hr class="my-4">
+					<div class="req-box">
+						<div class="req-img">
+							<%= attachment_image_tag request, :image, :fill, 150, 100, format: 'jpg', fallback: "1560031.jpg", size: '130x100' %>
+						</div>
+						<div class="req-text">
+							<p><%= request.title %></p>
+							<p><%= request.content %></p>
+						</div>
+					</div>
+					<hr class="my-4">
+				<% end %>
+			<% end %>
+		</div>
+	</div>
 </div>

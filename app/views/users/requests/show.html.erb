@@ -95,7 +95,9 @@
     <div class="col-sm-6 offset-sm-3">
       <% if @request.user.id == current_user.id %>
         <%= link_to "編集する", edit_users_request_path, class: "btn btn-outline-success" %>
-        <%= link_to "削除する", users_request_path, method: :delete, class: "btn btn-outline-danger" %>
+        <%= link_to "削除する", users_request_path, method: :delete, class: "btn btn-outline-danger", data: { confirm: "<i class='fa fa-exclamation-circle'></i>本当に依頼を削除しますか？",
+                                                   cancel: "戻る",
+                                                   commit: '削除する' } %>
       <% end %>
     </div>
   </div>
@@ -132,7 +134,7 @@
 
 <!-- 以下の記述の中にあるYOUR_API_KEYには取得したご自身のAPIキーを記述してください -->
 <script async defer
-              src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAzOoOIk2dKXLOvrab2OalNidBJTOE0ob0&callback=initMap">
+              src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
 </script>
 <!-- 表示するmapのcssです。ご自身でカスタマイズしてください。高さが設定されていないと表示されないことがあります。 -->
 <style type="text/css">

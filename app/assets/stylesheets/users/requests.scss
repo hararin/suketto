@@ -10,6 +10,15 @@
 	}
 }
 
+.req-box {
+  display: flex;
+  margin: 5px 0;
+}
+
+.req-text {
+  margin-left: 20px;
+}
+
 .modal-dialog {
   .modal-header {
     border-bottom: none;

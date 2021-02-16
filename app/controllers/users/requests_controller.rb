@@ -46,6 +46,6 @@ class Users::RequestsController < ApplicationController
 	private
 
 	def request_params
-		params.require(:request).permit(:event, :datetime, :address, :title, :content, :capacity)
+		params.require(:request).permit(:event, :datetime, :address, :title, :content, :capacity, :image)
 	end
 end

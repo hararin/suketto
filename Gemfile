@@ -73,3 +73,4 @@ gem "refile-mini_magick"
 gem 'data-confirm-modal'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
+gem "dotenv-rails"
