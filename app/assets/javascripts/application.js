@@ -17,6 +17,7 @@
 
 //= require popper
 //= require bootstrap
+// = require data-confirm-modal
 //= require bootstrap-sprockets
 
 //= require moment

@@ -1,10 +1,21 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-7 col-lg-6 offset-lg-1">
+    <div class="col-sm-12">
       <div>
         <h2><%= @request.title %></h2>
         <p><%= @request.content %></p>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-7 col-lg-6 offset-lg-1">
+      <table class="table table-bordered table-title">
+        <thead>
+          <tr>
+            <th>依頼詳細</th>
+          </tr>
+        </thead>
+      </table>
       <table class="table table-bordered">
         <tbody>
           <tr>
@@ -35,7 +46,13 @@
       </table>
     </div>
     <div class="col-sm-12 col-md-5 col-lg-4">
-      <p>助っ人一覧</p>
+      <table class="table table-bordered table-title">
+        <thead>
+          <tr>
+            <th>助っ人一覧</th>
+          </tr>
+        </thead>
+      </table>
       <% if @request.participants.exists? == false %>
         <table class="table table-bordered">
           <tbody>
@@ -59,14 +76,26 @@
       </table>
       <% if @request.user.id != current_user.id %>
           <% if @request.participants.exists?(user_id: current_user.id) %>
-            <%= link_to "キャンセルする", users_request_participant_path(@request, @participant), method: :delete, class: "btn btn-danger" %>
+            <%= link_to "キャンセルする", users_request_participant_path(@request, @participant), method: :delete, class: "btn btn-danger", data: { confirm: "<i class='fa fa-exclamation-circle'></i>本当に助っ人登録をキャンセルしますか？",
+                                                         cancel: "戻る",
+                                                         commit: "キャンセルする" } %>
           <% else %>
             <% if @request.capacity > @request.participants.count %>
-              <%= link_to "助っ人になる", users_request_participants_path(@request), method: :post, class: "btn btn-info" %>
+              <%= link_to "助っ人になる", users_request_participants_path(@request), method: :post, class: "btn btn-info", data: { confirm: "<i class='fa fa-exclamation-circle'></i>本当に助っ人登録しますか？",
+                                                     cancel: "戻る",
+                                                     commit: "登録する" } %>
             <% else %>
               <p>定員に達しました。</p>
             <% end %>
           <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <% if @request.user.id == current_user.id %>
+        <%= link_to "編集する", edit_users_request_path, class: "btn btn-outline-success" %>
+        <%= link_to "削除する", users_request_path, method: :delete, class: "btn btn-outline-danger" %>
       <% end %>
     </div>
   </div>
@@ -112,8 +141,3 @@
 </style>
 
 <!-- mapの表示 -->
-<% if @request.user.id == current_user.id %>
-	<%= link_to "編集する", edit_users_request_path %>
-	<%= link_to "削除する", users_request_path, method: :delete %>
-<% else %>
-<% end %>

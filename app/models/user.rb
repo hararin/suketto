@@ -11,5 +11,7 @@ class User < ApplicationRecord
   validates :age, presence: true
   validates :sex, presence: true
 
+  attachment :image
+
   enum sex: { 女性: 0, 男性: 1}
 end

@@ -6,10 +6,8 @@ class Users::CustomersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@participants = Participant.where(user_id: current_user.id)
-		@participants.each do |participant|
-			@requests = participant.request
-		end
+		@participants = @user.participants.all
+		@requests = @user.requests.all
 	end
 
 	def edit
@@ -19,7 +17,7 @@ class Users::CustomersController < ApplicationController
 	def update
 		@user = current_user
 		if @user.update(user_params)
-			redirect_to users_customer_path
+			redirect_to users_customer_path(current_user)
 		else
 			render :edit
 		end
@@ -31,6 +29,6 @@ class Users::CustomersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:name, :age, :sex)
+		params.require(:user).permit(:name, :age, :sex, :image)
 	end
 end

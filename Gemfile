@@ -68,3 +68,8 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'font-awesome-rails'
 gem 'momentjs-rails'
 gem 'bootstrap4-datetime-picker-rails'
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
+gem 'data-confirm-modal'
+gem 'bootstrap-sass'
+gem "font-awesome-rails"
