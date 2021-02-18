@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-class Users::SessionsController < Devise::SessionsController
+class Admins::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  def after_sign_in_path_for(resource)
-    users_customer_path(resource)
-  end
+
+  # def after_sign_in_path_for(resource)
+  #   admins_customer_path(resource)
+  # end
 
   # GET /resource/sign_in
   # def new

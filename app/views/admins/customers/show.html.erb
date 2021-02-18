@@ -1,0 +1,60 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 profile">
+			<div>
+				<%= attachment_image_tag @user, :image, :fill, 100, 100, format: 'jpeg' %>
+			</div>
+			<div>
+				<p><%= @user.name %></p>
+				<p><%= @user.age %></p>
+				<p><%= @user.sex %></p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<table class="table table-bordered table-title">
+				<thead>
+					<tr>
+						<th><%= @user.name %>さんの依頼履歴</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<tbody>
+					<% @num = 1 %>
+					<% @requests.each do |request| %>
+						<tr>
+							<th><%= @num %></th>
+							<td><%= link_to request.title, admins_request_path(request) %></td>
+							<td><%= request.datetime %></td>
+						</tr>
+						<% @num = @num + 1 %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<table class="table table-bordered table-title">
+				<thead>
+					<tr>
+						<th><%= @user.name %>さんの助っ人履歴</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<tbody>
+					<% @num = 1 %>
+					<% @participants.each do |participant| %>
+						<tr>
+							<th><%= @num %></th>
+							<td><%= link_to participant.request.title, admins_request_path(participant.request) %></td>
+							<td><%= participant.request.datetime %></td>
+						</tr>
+						<% @num = @num + 1 %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

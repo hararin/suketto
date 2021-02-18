@@ -1,0 +1,35 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ユーザー一覧</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>名前</th>
+						<th>年齢</th>
+						<th>性別</th>
+						<th>登録日</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @users.each do |user| %>
+						<tr>
+							<td><%= user.id %></td>
+							<td><%= link_to user.name, admins_customer_path(user) %></td>
+							<td><%= user.age %></td>
+							<td><%= user.sex %></td>
+							<td><%= user.created_at %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

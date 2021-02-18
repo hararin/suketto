@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>依頼一覧</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>依頼者</th>
+						<th>タイトル</th>
+						<th>依頼日</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @requests.each do |request| %>
+						<tr>
+							<td><%= request.id %></td>
+							<td><%= link_to request.user.name, admins_customer_path(request.user) %></td>
+							<td><%= link_to request.title, admins_request_path(request) %></td>
+							<td><%= request.created_at %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions'
+  }
+
+  namespace :admins do
+    resources :customers, only:[:index, :show]
+    resources :requests, only:[:index, :show]
+  end
+
+
   devise_for :users, controllers: {
   	registrations: 'users/registrations',
   	sessions: 'users/sessions'
