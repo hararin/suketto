@@ -41,6 +41,12 @@
               <li class="nav-item">
                 <%= link_to "依頼一覧", admins_requests_path, class: "nav-link" %>
               </li>
+              <li class="nav-item">
+                <%= link_to "チケット一覧", admins_tickets_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+              </li>
             <% else %>
               <li class="nav-item">
                 <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>

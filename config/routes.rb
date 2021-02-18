@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :customers, only:[:index, :show]
     resources :requests, only:[:index, :show]
+    resources :tickets, except:[:new, :show]
   end
 
 
