@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-6 offset-sm-3">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-10 offset-sm-1">
+					<%= form_with model:@purchase, url: users_purchases_path do |f| %>
+						<div>
+							<%= f.collection_select :ticket_id, @tickets, :id, :name, prompt: "選択してください" %>
+						</div>
+						<div>
+							<%= f.select :quantity, [1, 2, 3, 4, 5], prompt: "購入数" %>
+						</div>
+						<div>
+							<p>支払方法</p>
+							<label><%= f.radio_button :payment_method, "クレジットカード" %>クレジットカード</label>
+							<label><%= f.radio_button :payment_method, "銀行振込" %>銀行振込</label>
+						</div>
+						<div>
+							<%= f.submit "購入する", class: "btn btn-danger" %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
