@@ -10,9 +10,15 @@ class Users::RequestsController < ApplicationController
 
 	def create
 		@request = current_user.requests.new(request_params)
-		if @request.save
-			redirect_to users_requests_path
+		if current_user.ticket >= params[:request][:capacity].to_i
+			if @request.save
+				current_user.update(ticket: current_user.ticket - params[:request][:capacity].to_i)
+				redirect_to users_requests_path
+			else
+				render :new
+			end
 		else
+			flash[:danger] = "助っ人チケットが不足しています"
 			render :new
 		end
 	end
