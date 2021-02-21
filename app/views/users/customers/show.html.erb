@@ -1,18 +1,23 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-8 profile">
-			<div>
-				<%= attachment_image_tag @user, :image, :fill, 100, 100, format: 'jpeg' %>
-			</div>
-			<div>
-				<p><%= @user.name %></p>
-				<p><%= @user.age %></p>
-				<p><%= @user.sex %></p>
-			</div>
+		<div class="col-sm-6 offset-sm-3">
+			<%= attachment_image_tag @user, :image, :fill, 100, 100, format: 'jpeg', class: "img" %>
+		</div>
+		<div class="col-sm-6 offset-sm-3">
+			<p>
+				<%= @user.name %>
+				<% if @user.sex == "女性" %>
+					<i class="fa fa-venus"></i>
+				<% else %>
+					<i class="fa fa-mars"></i>
+				<% end %>
+			</p>
+			<p><%= @user.age %>歳</p>
+			<p><%= @user.ticket %></p>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-12 col-md-6">
+		<div class="col-sm-12 col-md-6 col-lg-5 offset-lg-1">
 			<table class="table table-bordered table-title">
 				<thead>
 					<tr>
@@ -28,13 +33,20 @@
 							<th><%= @num %></th>
 							<td><%= link_to request.title, users_request_path(request) %></td>
 							<td><%= request.datetime %></td>
+							<td>
+								<% if DateTime.now > request.datetime %>
+									済
+								<% else %>
+									未
+								<% end %>
+							</td>
 						</tr>
 						<% @num = @num + 1 %>
 					<% end %>
 				</tbody>
 			</table>
 		</div>
-		<div class="col-sm-12 col-md-6">
+		<div class="col-sm-12 col-md-6 col-lg-5">
 			<table class="table table-bordered table-title">
 				<thead>
 					<tr>
@@ -50,6 +62,13 @@
 							<th><%= @num %></th>
 							<td><%= link_to participant.request.title, users_request_path(participant.request) %></td>
 							<td><%= participant.request.datetime %></td>
+							<td>
+								<% if DateTime.now > participant.request.datetime %>
+									済
+								<% else %>
+									未
+								<% end %>
+							</td>
 						</tr>
 						<% @num = @num + 1 %>
 					<% end %>

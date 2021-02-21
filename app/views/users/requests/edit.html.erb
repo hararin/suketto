@@ -1,23 +1,74 @@
-<%= form_with model: @request, url: users_request_path do |f| %>
-	<div>
-		<%= f.text_field :title, :placeholder => "タイトル" %>
+<div class="container">
+	<% if flash[:error] %>
+		<div class="error-message">
+			<%= flash[:error] %>
+		</div>
+	<% end %>
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1">
+			<%= form_with model: @request, url: users_request_path(@request), class: "form-horizontal" do |f| %>
+				<div class="form-group row">
+					<%= f.label :"タイトル", class: "col-sm-4 control-label" %>
+					<div class="col-sm-8">
+						<%= f.text_field :title, class: "form-control" %>
+					</div>
+				</div>
+				<div class="form-group row">
+					<%= f.label :"詳細", class: "col-sm-4 control-label" %>
+					<div class="col-sm-8">
+						<%= f.text_area :content, class: "form-control" %>
+					</div>
+				</div>
+				<div class="form-group row">
+					<%= f.label :"日時", class: "col-sm-4 control-label" %>
+					<div class="input-group col-sm-8" data-target-input="nearest">
+						<%= f.text_field :datetime, id: "datetime",class: "form-control datepicker", data: { target: '#datetime'} %>
+						<div class="input-group-append" data-target="#datetime" data-toggle="datetimepicker">
+				        	<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				   		</div>
+					</div>
+				</div>
+			    <div class="form-group row">
+			    	<%= f.label :"住所", class: "col-sm-4 control-label" %>
+				    <div class="col-sm-8">
+						<%= f.text_field :address, class: "form-control" %>
+					</div>
+			    </div>
+			    <div class="form-group row">
+			    	<%= f.label :"募集人数", class: "col-sm-4 control-label" %>
+				    <div class="col-sm-8">
+						<%= f.text_field :capacity, class: "form-control" %>
+					</div>
+			    </div>
+				<div class="form-group row">
+					<%= f.label :"募集締切日時", class: "col-sm-4 control-label" %>
+					<div class="input-group col-sm-8" data-target-input="nearest">
+						<%= f.text_field :deadline, id: "deadline",class: "form-control datepicker", data: { target: '#deadline'} %>
+						<div class="input-group-append" data-target="#deadline" data-toggle="datetimepicker">
+				        	<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				   		</div>
+					</div>
+				</div>
+			    <div class="form-group row">
+			    	<%= f.label :"サムネイル", class: "col-sm-4 control-label" %>
+				    <div class="col-sm-8">
+						<%= f.attachment_field :image, class: "form-control" %>
+					</div>
+			    </div>
+				<div>
+					<%= f.submit "更新する", class: "btn btn-success" %>
+				</div>
+			<% end %>
+		</div>
 	</div>
-	<div>
-		<%= f.text_field :event, :placeholder => "イベント名" %>
-	</div>
-	<div>
-		<%= f.text_area :content, :placeholder => "詳細" %>
-	</div>
-	<div>
-		<%= f.text_field :datetime, :placeholder => "日時" %>
-	</div>
-	<div>
-		<%= f.text_field :address, :placeholder => "場所" %>
-	</div>
-	<div>
-		<%= f.text_field :capacity, :placeholder => "募集人数" %>
-	</div>
-	<div>
-		<%= f.submit "更新する" %>
-	</div>
-<% end %>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetime').datetimepicker();
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#deadline').datetimepicker();
+    });
+</script>

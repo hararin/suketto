@@ -3,7 +3,6 @@ class Request < ApplicationRecord
 	belongs_to :user
 	has_many :participants, dependent: :destroy
 
-	validates :event, presence: true
  	validates :datetime, presence: true
   	validates :address, presence: true
   	validates :title, presence: true

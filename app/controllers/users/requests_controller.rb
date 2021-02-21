@@ -18,8 +18,7 @@ class Users::RequestsController < ApplicationController
 				render :new
 			end
 		else
-			flash[:danger] = "助っ人チケットが不足しています"
-			render :new
+			redirect_to new_users_request_path, flash: { error: "助っ人チケットが不足しています" }
 		end
 	end
 
@@ -52,6 +51,6 @@ class Users::RequestsController < ApplicationController
 	private
 
 	def request_params
-		params.require(:request).permit(:event, :datetime, :address, :title, :content, :capacity, :image)
+		params.require(:request).permit(:datetime, :address, :title, :content, :capacity, :image, :deadline)
 	end
 end

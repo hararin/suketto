@@ -1,49 +1,57 @@
 <div class="container">
+	<% if flash[:error] %>
+		<div class="error-message">
+			<%= flash[:error] %>
+		</div>
+	<% end %>
 	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1 form">
+		<div class="col-sm-10 col-sm-offset-1">
 			<%= form_with model: @request, url: users_requests_path, method: :post, class: "form-horizontal" do |f| %>
 				<div class="form-group row">
 					<%= f.label :"タイトル", class: "col-sm-4 control-label" %>
-					<div class="col-sm-10">
+					<div class="col-sm-8">
 						<%= f.text_field :title, class: "form-control" %>
 					</div>
 				</div>
 				<div class="form-group row">
-					<%= f.label :"イベント名", class: "col-sm-4 control-label" %>
-					<div class="col-sm-10">
-						<%= f.text_field :event, class: "form-control" %>
-					</div>
-				</div>
-				<div class="form-group row">
-					<%= f.label :"イベント詳細", class: "col-sm-4 control-label" %>
-					<div class="col-sm-10">
+					<%= f.label :"詳細", class: "col-sm-4 control-label" %>
+					<div class="col-sm-8">
 						<%= f.text_area :content, class: "form-control" %>
 					</div>
 				</div>
-				<div class="form-group">
-			        <div class="input-group date" id="datetime" data-target-input="nearest">
-			            <input type="text" class="form-control datetimepicker-input" data-target="#datetime"/>
-			                <div class="input-group-append" data-target="#datetime" data-toggle="datetimepicker">
-			                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-			                </div>
-			        </div>
-			    </div>
-			    <%= f.text_field :datetime %>
+				<div class="form-group row">
+					<%= f.label :"日時", class: "col-sm-4 control-label" %>
+					<div class="input-group col-sm-8" data-target-input="nearest">
+						<%= f.text_field :datetime, id: "datetime",class: "form-control datepicker", data: { target: '#datetime'} %>
+						<div class="input-group-append" data-target="#datetime" data-toggle="datetimepicker">
+				        	<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				   		</div>
+					</div>
+				</div>
 			    <div class="form-group row">
-			    	<%= f.label :"イベント場所(住所)", class: "col-sm-6 control-label" %>
-				    <div class="col-sm-10">
+			    	<%= f.label :"住所", class: "col-sm-4 control-label" %>
+				    <div class="col-sm-8">
 						<%= f.text_field :address, class: "form-control" %>
 					</div>
 			    </div>
 			    <div class="form-group row">
-			    	<%= f.label :"募集人数", class: "col-sm-6 control-label" %>
-				    <div class="col-sm-10">
+			    	<%= f.label :"募集人数", class: "col-sm-4 control-label" %>
+				    <div class="col-sm-8">
 						<%= f.text_field :capacity, class: "form-control" %>
 					</div>
 			    </div>
+				<div class="form-group row">
+					<%= f.label :"募集締切日時", class: "col-sm-4 control-label" %>
+					<div class="input-group col-sm-8" data-target-input="nearest">
+						<%= f.text_field :deadline, id: "deadline",class: "form-control datepicker", data: { target: '#deadline'} %>
+						<div class="input-group-append" data-target="#deadline" data-toggle="datetimepicker">
+				        	<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				   		</div>
+					</div>
+				</div>
 			    <div class="form-group row">
-			    	<%= f.label :"サムネイル", class: "col-sm-6 control-label" %>
-				    <div class="col-sm-10">
+			    	<%= f.label :"サムネイル", class: "col-sm-4 control-label" %>
+				    <div class="col-sm-8">
 						<%= f.attachment_field :image, class: "form-control" %>
 					</div>
 			    </div>
@@ -57,5 +65,10 @@
 <script type="text/javascript">
     $(function () {
         $('#datetime').datetimepicker();
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#deadline').datetimepicker();
     });
 </script>
