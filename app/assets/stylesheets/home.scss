@@ -2,8 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.top {
-	margin-top: 150px;
+.home {
+	height: 800px;
+	background-image: url(315010_s.jpg);
+	background-position: center;
+	background-size: cover;
+	opacity : 1.0;
+	p {
+		font-size: 75px;
+		color: yellow;
+		text-shadow:0 10px 10px black;
+		margin-top: 150px;
+		font-weight: 900;
+	}
 }
 
 div {

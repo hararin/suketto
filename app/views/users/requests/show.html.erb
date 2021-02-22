@@ -82,6 +82,7 @@
         </tbody>
       </table>
       <% if DateTime.now >= @request.datetime %>
+        <% @request.ticket_return(@request) %>
         <p>この依頼は終了しました</p>
       <% else %>
         <% if @request.user.id != current_user.id %>

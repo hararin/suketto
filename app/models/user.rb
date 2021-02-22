@@ -15,4 +15,5 @@ class User < ApplicationRecord
   attachment :image
 
   enum sex: { 女性: 0, 男性: 1}
+
 end

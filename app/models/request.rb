@@ -11,4 +11,10 @@ class Request < ApplicationRecord
   	after_validation :geocode, if: :address_changed?
 
   	attachment :image
+
+  	def ticket_return(request)
+  		request.user.update(ticket: request.user.ticket + request.capacity - request.participants.count)
+  	end
+
+
 end

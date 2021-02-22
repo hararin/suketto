@@ -35,15 +35,34 @@ class Users::RequestsController < ApplicationController
 
 	def update
 		@request = Request.find(params[:id])
-		if @request.update(request_params)
-			redirect_to users_request_path(@request)
+		difference = params[:request][:capacity].to_i - @request.capacity
+		if difference >= 0
+			if current_user.ticket >= difference
+				if @request.update(request_params)
+					current_user.update(ticket: current_user.ticket - difference)
+					redirect_to users_request_path(@request)
+				else
+					render :edit
+				end
+			else
+				redirect_to edit_users_request_path(@request), flash: { error: "チケットが不足しています。" }
+			end
 		else
-			render :edit
+			if @request.update(request_params)
+				current_user.update(ticket: current_user.ticket - difference)
+				redirect_to users_request_path(@request)
+			else
+				render :edit
+			end
 		end
 	end
 
 	def destroy
 		@request = Request.find(params[:id])
+		if DateTime.now >= @request.datetime
+			redirect_to users_request_path(@request), flash: { error: "依頼が終了しているため削除できません。" }
+		end
+		@request.ticket_return(@request)
 		@request.destroy
 		redirect_to users_requests_path
 	end

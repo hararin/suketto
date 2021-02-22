@@ -39,6 +39,7 @@
 				    <div class="col-sm-8">
 						<%= f.text_field :capacity, class: "form-control" %>
 					</div>
+					<p>＊募集人数を変更した場合、変更前と変更後の差分のチケットが消費または返還されます。</p>
 			    </div>
 				<div class="form-group row">
 					<%= f.label :"募集締切日時", class: "col-sm-4 control-label" %>
@@ -66,8 +67,6 @@
     $(function () {
         $('#datetime').datetimepicker();
     });
-</script>
-<script type="text/javascript">
     $(function () {
         $('#deadline').datetimepicker();
     });
