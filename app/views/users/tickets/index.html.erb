@@ -12,7 +12,7 @@
 					<%= form_with model:@purchase, url: users_purchases_path do |f| %>
 						<p>(1)購入するチケットと購入数を選択してください</p>
 						<div>
-							<%= f.collection_select :ticket_id, @tickets, :id, :name, prompt: "選択してください" %> <%= f.select :quantity, [1, 2, 3, 4, 5], prompt: "購入数" %>
+							<%= f.collection_select :ticket_id, @tickets, :id, :name, prompt: "購入するチケット" %> <%= f.select :quantity, [1, 2, 3, 4, 5], prompt: "購入数" %>
 						</div>
 						<div>
 							<p>(2)支払方法を選択してください</p>
