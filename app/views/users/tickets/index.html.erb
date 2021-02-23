@@ -1,21 +1,21 @@
-<div class="container">
+<div class="container background">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-12 col-md-6 col-lg-5 offset-lg-1" style="margin-bottom: 20px;">
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3">
+				<div class="col-sm-12 ticket-possession">
+					<p><%= current_user.name %>さんの保有チケット数</p>
+					<i class="fa fa-ticket-alt"></i>x<%= current_user.ticket %>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-10 offset-sm-1">
+				<div class="col-sm-10 offset-sm-1 purchase-form">
 					<%= form_with model:@purchase, url: users_purchases_path do |f| %>
+						<p>(1)購入するチケットと購入数を選択してください</p>
 						<div>
-							<%= f.collection_select :ticket_id, @tickets, :id, :name, prompt: "選択してください" %>
+							<%= f.collection_select :ticket_id, @tickets, :id, :name, prompt: "選択してください" %> <%= f.select :quantity, [1, 2, 3, 4, 5], prompt: "購入数" %>
 						</div>
 						<div>
-							<%= f.select :quantity, [1, 2, 3, 4, 5], prompt: "購入数" %>
-						</div>
-						<div>
-							<p>支払方法</p>
+							<p>(2)支払方法を選択してください</p>
 							<label><%= f.radio_button :payment_method, "クレジットカード" %>クレジットカード</label>
 							<label><%= f.radio_button :payment_method, "銀行振込" %>銀行振込</label>
 						</div>
@@ -25,6 +25,35 @@
 					<% end %>
 				</div>
 			</div>
+		</div>
+		<div class="col-sm-10 offset-sm-1 col-md-6 col-lg-5">
+			<table class="table table-bordered table-title">
+				<thead>
+					<tr>
+						<th><%= current_user.name %>さんのチケット購入履歴</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>購入日</th>
+						<th>チケット名</th>
+						<th>購入数</th>
+						<th>請求額</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @purchases.each do |purchase| %>
+						<tr>
+							<td><%= purchase.created_at.strftime('%Y/%m/%d') %></td>
+							<td><%= purchase.ticket.name %></td>
+							<td><%= purchase.quantity %></td>
+							<td><%= purchase.charge %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

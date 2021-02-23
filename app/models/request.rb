@@ -13,8 +13,12 @@ class Request < ApplicationRecord
   	attachment :image
 
   	def ticket_return(request)
-  		request.user.update(ticket: request.user.ticket + request.capacity - request.participants.count)
+      count = 1
+      lambda do
+        return if count == nil
+        request.user.update(ticket: request.user.ticket + request.capacity - request.participants.count)
+        count = nil
+        yield
+      end
   	end
-
-
 end

@@ -32,7 +32,7 @@
 						<tr>
 							<th><%= @num %></th>
 							<td><%= link_to request.title, users_request_path(request) %></td>
-							<td><%= request.datetime %></td>
+							<td><%= request.datetime.strftime('%Y/%m/%d') %></td>
 							<td>
 								<% if DateTime.now > request.datetime %>
 									済
@@ -61,7 +61,7 @@
 						<tr>
 							<th><%= @num %></th>
 							<td><%= link_to participant.request.title, users_request_path(participant.request) %></td>
-							<td><%= participant.request.datetime %></td>
+							<td><%= participant.request.datetime.strftime('%Y/%m/%d') %></td>
 							<td>
 								<% if DateTime.now > participant.request.datetime %>
 									済
