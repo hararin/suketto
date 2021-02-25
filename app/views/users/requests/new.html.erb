@@ -5,7 +5,7 @@
 		</div>
 	<% end %>
 	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-10 offset-sm-1 form">
 			<%= form_with model: @request, url: users_requests_path, method: :post, class: "form-horizontal" do |f| %>
 				<div class="form-group row">
 					<%= f.label :"タイトル", class: "col-sm-4 control-label" %>
@@ -52,19 +52,20 @@
 			    <div class="form-group row">
 			    	<%= f.label :"サムネイル", class: "col-sm-4 control-label" %>
 				    <div class="col-sm-8">
-						<%= f.attachment_field :image, class: "form-control" %>
+						<%= f.attachment_field :image %>
 					</div>
 			    </div>
 				<div>
 					<%= f.submit "依頼する", class: "btn btn-primary" %>
 				</div>
 			<% end %>
+			<div class="caution">
+				<p>＊依頼の際には、募集人数分のチケットが消費されます。<br>＊募集人数に助っ人数が達しなかった場合、依頼終了後または依頼削除後に余分のチケットが返却されます。</p>
+			</div>
 		</div>
 	</div>
 </div>
-<div class="caution">
-	<p>＊依頼の際には、募集人数分のチケットが消費されます。<br>＊募集人数に助っ人数が達しなかった場合、依頼終了後または依頼削除後に余分のチケットが返却されます。</p>
-</div>
+
 <script type="text/javascript">
     $(function () {
         $('#datetime').datetimepicker();

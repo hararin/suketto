@@ -1,19 +1,46 @@
 <div class="container">
-	<div class="row">
-		<div class="col-sm-6 offset-sm-3">
-			<%= attachment_image_tag @user, :image, :fill, 100, 100, format: 'jpeg', class: "img" %>
+	<% if flash[:notice] %>
+		<div class="row">
+			<div class="col-sm-12 col-md-6 offset-md-3 notice-message">
+				<%= flash[:notice] %>
+			</div>
 		</div>
-		<div class="col-sm-6 offset-sm-3">
-			<p>
-				<%= @user.name %>
-				<% if @user.sex == "女性" %>
-					<i class="fa fa-venus"></i>
-				<% else %>
-					<i class="fa fa-mars"></i>
-				<% end %>
-			</p>
-			<p><%= @user.age %>歳</p>
-			<p><%= @user.ticket %></p>
+	<% end %>
+	<div class="row">
+		<div class="col-sm-9 col-md-6 offset-sm-1 offset-md-2 profile">
+			<div>
+				<%= attachment_image_tag @user, :image, :fill, 150, 150, format: 'jpeg', class: "img" %>
+			</div>
+			<div>
+				<table>
+					<tbody>
+						<tr>
+							<th>名前: </th>
+							<td><%= @user.name %></td>
+						</tr>
+						<tr>
+							<th>年齢: </th>
+							<td><%= @user.age %>歳</td>
+						</tr>
+						<tr>
+							<th>性別: </th>
+							<td>
+								<% if @user.sex == "女性" %>
+									<i class="fa fa-venus"></i>
+								<% else %>
+									<i class="fa fa-mars"></i>
+								<% end %>
+							</td>
+						</tr>
+						<% if current_user %>
+							<tr>
+								<th>保有チケット: </th>
+								<td><%= @user.ticket %>枚</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -77,7 +104,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col">
+		<div>
 			<% if @user.id == current_user.id %>
 				<p><%= link_to "編集する", edit_users_customer_path(@user), class: "btn btn-outline-success" %></p>
 			<% end %>

@@ -1,7 +1,10 @@
 class Users::RequestsController < ApplicationController
 
+	before_action :authenticate_user!, except: :index
+	before_action :cannot_change, only: [:edit, :update, :destroy]
+
 	def index
-		@requests = Request.all
+		@requests = Request.page(params[:page]).per(5)
 	end
 
 	def new
@@ -30,11 +33,9 @@ class Users::RequestsController < ApplicationController
 	end
 
 	def edit
-		@request = Request.find(params[:id])
 	end
 
 	def update
-		@request = Request.find(params[:id])
 		difference = params[:request][:capacity].to_i - @request.capacity
 		if difference >= 0
 			if current_user.ticket >= difference
@@ -58,10 +59,6 @@ class Users::RequestsController < ApplicationController
 	end
 
 	def destroy
-		@request = Request.find(params[:id])
-		if DateTime.now >= @request.datetime
-			redirect_to users_request_path(@request), flash: { error: "依頼が終了しているため削除できません。" }
-		end
 		@request.ticket_return(@request)
 		@request.destroy
 		redirect_to users_requests_path
@@ -72,4 +69,12 @@ class Users::RequestsController < ApplicationController
 	def request_params
 		params.require(:request).permit(:datetime, :address, :title, :content, :capacity, :image, :deadline)
 	end
+
+	def cannot_change
+		@request = Request.find(params[:id])
+		if DateTime.now >= @request.datetime
+			redirect_to users_request_path(@request), flash: { error: "依頼が終了しているため変更できません" }
+		end
+	end
+
 end

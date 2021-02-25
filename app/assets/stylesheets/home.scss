@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.container {
+	padding: 20px;
+	background-color: #fff;
+}
+
 .home {
 	height: 800px;
 	background-image: url(4481879_m.jpg);

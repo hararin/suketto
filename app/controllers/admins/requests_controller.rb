@@ -1,7 +1,7 @@
 class Admins::RequestsController < ApplicationController
 
 	def index
-		@requests = Request.all
+		@requests = Request.page(params[:page]).per(5)
 	end
 
 	def show

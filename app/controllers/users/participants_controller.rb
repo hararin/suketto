@@ -1,5 +1,7 @@
 class Users::ParticipantsController < ApplicationController
 
+	before_action :authenticate_user!
+
 	def create
 		@request = Request.find_by(id: params[:request_id])
 		@participant = @request.participants.new

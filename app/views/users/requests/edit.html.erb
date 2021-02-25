@@ -5,7 +5,7 @@
 		</div>
 	<% end %>
 	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-10 offset-sm-1 form">
 			<%= form_with model: @request, url: users_request_path(@request), class: "form-horizontal" do |f| %>
 				<div class="form-group row">
 					<%= f.label :"タイトル", class: "col-sm-4 control-label" %>
@@ -39,7 +39,9 @@
 				    <div class="col-sm-8">
 						<%= f.text_field :capacity, class: "form-control" %>
 					</div>
-					<p>＊募集人数を変更した場合、変更前と変更後の差分のチケットが消費または返還されます。</p>
+					<div class="caution">
+						<p>＊募集人数を変更した場合、変更前と変更後の差分のチケットが消費または返還されます。</p>
+					</div>
 			    </div>
 				<div class="form-group row">
 					<%= f.label :"募集締切日時", class: "col-sm-4 control-label" %>
@@ -53,11 +55,11 @@
 			    <div class="form-group row">
 			    	<%= f.label :"サムネイル", class: "col-sm-4 control-label" %>
 				    <div class="col-sm-8">
-						<%= f.attachment_field :image, class: "form-control" %>
+						<%= f.attachment_field :image %>
 					</div>
 			    </div>
 				<div>
-					<%= f.submit "更新する", class: "btn btn-success" %>
+					<%= f.submit "更新する", class: "btn btn-success", style: "margin-bottom: 20px;" %>
 				</div>
 			<% end %>
 		</div>

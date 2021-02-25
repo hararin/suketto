@@ -1,3 +1,23 @@
 // Place all the styles related to the users::customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.notice-message {
+	padding: 5px;
+	margin-bottom: 15px;
+	border: 2px solid green;
+}
+
+.profile {
+	background-color: #fff;
+	padding: 5px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	display: flex;
+	table {
+		margin-left: 20px;
+		td {
+			padding: 5px;
+		}
+	}
+}

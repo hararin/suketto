@@ -1,59 +1,63 @@
-<div class="container background">
+<div class="container">
+	<% if flash[:error] %>
+		<div class="row">
+			<div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 error-message">
+				<%= flash[:error] %>
+			</div>
+		</div>
+	<% end %>
 	<div class="row">
-		<div class="col-sm-12 col-md-6 col-lg-5 offset-lg-1" style="margin-bottom: 20px;">
-			<div class="row">
-				<div class="col-sm-12 ticket-possession">
-					<p><%= current_user.name %>さんの保有チケット数</p>
-					<i class="fa fa-ticket-alt"></i>x<%= current_user.ticket %>
+		<div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 purchase-form">
+			<%= form_with model:@purchase, url: users_purchases_path do |f| %>
+				<p>(1)購入するチケットと購入数を選択してください</p>
+				<div>
+					<%= f.collection_select :ticket_id, @tickets, :id, :name, prompt: "購入するチケット" %> <%= f.select :quantity, [1, 2, 3, 4, 5], prompt: "購入数" %>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-10 offset-sm-1 purchase-form">
-					<%= form_with model:@purchase, url: users_purchases_path do |f| %>
-						<p>(1)購入するチケットと購入数を選択してください</p>
-						<div>
-							<%= f.collection_select :ticket_id, @tickets, :id, :name, prompt: "購入するチケット" %> <%= f.select :quantity, [1, 2, 3, 4, 5], prompt: "購入数" %>
-						</div>
-						<div>
-							<p>(2)支払方法を選択してください</p>
-							<label><%= f.radio_button :payment_method, "クレジットカード" %>クレジットカード</label>
-							<label><%= f.radio_button :payment_method, "銀行振込" %>銀行振込</label>
-						</div>
-						<div>
-							<%= f.submit "購入する", class: "btn btn-danger" %>
-						</div>
-					<% end %>
+				<p>(2)支払方法を選択してください</p>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn btn-outline-info active">
+						<%= f.radio_button :payment_method, "クレジットカード", {checked: true} %>クレジットカード
+					</label>
+					<label class="btn btn-outline-info">
+						<%= f.radio_button :payment_method, "銀行振込", {} %>銀行振込
+					</label>
 				</div>
-			</div>
+				<div>
+					<%= f.submit "購入する", class: "btn btn-outline-danger", style: "margin-top: 10px;", data: { confirm: "<i class='fa fa-exclamation-circle'></i>本当に購入しますか？",
+                                cancel: "戻る",
+                                commit: '購入する' } %>
+				</div>
+				<p><%= current_user.name %>さんのチケット保有数: <%= current_user.ticket %>枚</p>
+			<% end %>
 		</div>
-		<div class="col-sm-10 offset-sm-1 col-md-6 col-lg-5">
-			<table class="table table-bordered table-title">
-				<thead>
+	</div>
+	<div class="row">
+		<table class="table table-bordered table-title col-10 offset-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+			<thead>
+				<tr>
+					<th><%= current_user.name %>さんのチケット購入履歴</th>
+				</tr>
+			</thead>
+		</table>
+		<table class="table table-bordered col-10 offset-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+			<thead>
+				<tr>
+					<th>購入日</th>
+					<th>チケット名</th>
+					<th>購入数</th>
+					<th>請求額</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @purchases.each do |purchase| %>
 					<tr>
-						<th><%= current_user.name %>さんのチケット購入履歴</th>
+						<td><%= purchase.created_at.strftime('%Y/%m/%d') %></td>
+						<td><%= purchase.ticket.name %></td>
+						<td><%= purchase.quantity %></td>
+						<td><%= purchase.charge %></td>
 					</tr>
-				</thead>
-			</table>
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>購入日</th>
-						<th>チケット名</th>
-						<th>購入数</th>
-						<th>請求額</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% @purchases.each do |purchase| %>
-						<tr>
-							<td><%= purchase.created_at.strftime('%Y/%m/%d') %></td>
-							<td><%= purchase.ticket.name %></td>
-							<td><%= purchase.quantity %></td>
-							<td><%= purchase.charge %></td>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
-		</div>
+				<% end %>
+			</tbody>
+		</table>
 	</div>
 </div>
