@@ -122,4 +122,13 @@
 			<%= paginate @participants %>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-6 offset-3">
+			<% if @user.is_banned == true %>
+				<%= "アカウント停止を解除する" %>
+			<% else %>
+				<%= link_to "アカウントを停止する", admins_path(@user), class: "btn btn-danger", method: :patch %>
+			<% end %>
+		</div>
+	</div>
 </div>

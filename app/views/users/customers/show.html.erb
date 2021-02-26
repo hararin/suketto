@@ -5,6 +5,12 @@
 				<%= flash[:notice] %>
 			</div>
 		</div>
+	<% elsif flash[:error] %>
+		<div class="row">
+			<div class="col-sm-12 col-md-6 offset-md-3 error-message">
+				<i class="fa fa-exclamation-circle"></i><%= flash[:error] %>
+			</div>
+		</div>
 	<% end %>
 	<div class="row">
 		<div class="col-sm-8 col-md-6 offset-sm-2 offset-md-3 user">

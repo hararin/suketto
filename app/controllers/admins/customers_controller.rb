@@ -11,4 +11,10 @@ class Admins::CustomersController < ApplicationController
 		@purchases = @user.purchases.page(params[:page]).per(5)
 	end
 
+	def ban
+		@user = User.find(params[:id])
+		@user.update(is_banned: true)
+		redirect_to admins_customer_path(@user)
+	end
+
 end

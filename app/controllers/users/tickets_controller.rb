@@ -1,6 +1,7 @@
 class Users::TicketsController < ApplicationController
 
 	before_action :authenticate_user!
+	before_action :is_banned
 
 	def index
 		@tickets = Ticket.all

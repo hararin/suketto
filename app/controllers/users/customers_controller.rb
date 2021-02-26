@@ -1,10 +1,7 @@
 class Users::CustomersController < ApplicationController
 
 	before_action :authenticate_user!
-
-	def index
-		@user = Users.all
-	end
+	before_action :is_banned, only:[:edit, :update]
 
 	def show
 		@user = User.find(params[:id])

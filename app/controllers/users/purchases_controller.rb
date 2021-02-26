@@ -1,6 +1,7 @@
 class Users::PurchasesController < ApplicationController
 
 	before_action :authenticate_user!
+	before_action :is_banned
 
 	def create
 		if params[:purchase][:ticket_id] == "" || params[:purchase][:quantity] == ""

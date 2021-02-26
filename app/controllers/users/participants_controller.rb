@@ -1,6 +1,7 @@
 class Users::ParticipantsController < ApplicationController
 
 	before_action :authenticate_user!
+	before_action :is_banned
 
 	def create
 		@request = Request.find_by(id: params[:request_id])

@@ -1,5 +1,8 @@
 class Users::ReportsController < ApplicationController
 
+	before_action :authenticate_user!
+	before_action :is_banned
+
 	def new
 		@report = Report.new
 		@respondent = User.find(params[:customer_id])
