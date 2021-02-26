@@ -116,6 +116,13 @@
 			<%= paginate @participants %>
 		</div>
 	</div>
+	<% if @user != current_user %>
+		<div class="row">
+			<div class="col-sm-8 col-md-6 offset-sm-2 offset-md-3">
+				<%= link_to "通報する", new_users_customer_report_path(@user), class: "btn btn-outline-danger", style: "margin-top: 20px;" %>
+			</div>
+		</div>
+	<% end %>
 </div>
 
 <script>

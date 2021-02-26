@@ -1,0 +1,24 @@
+<div class="container">
+	<% if flash[:error] %>
+	    <div class="row">
+	      	<div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3 error-message">
+	    		<i class="fa fa-exclamation-circle"></i><%= flash[:error] %>
+　　　   	</div>
+	    </div>
+	 <% end %>
+	<div class="row">
+		<div class="col-12">
+			<p>以下のユーザーを通報します。</p>
+			<p><%= @respondent.name %></p>
+			<%= form_with model: @report, url: users_customer_reports_path(@respondent), method: :post do |f| %>
+				<div class="row">
+					<%= f.text_area :content, class: "form-control col-12 col-sm-10 col-md-6 offset-md-3 offset-1", :placeholder => "通報理由を入力してください・" %>
+				</div>
+				<div>
+					<%= f.submit "通報する", class: "btn btn-danger" %>
+				</div>
+			<% end %>
+			<p>・通報理由を必ず入力してください。<br>・通報後は取り消すことができません。</p>
+		</div>
+	</div>
+</div>

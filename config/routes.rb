@@ -4,9 +4,8 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
-    resources :customers, only:[:index, :show] do
-      resources :reports, only:[:index, :show]
-    end
+    resources :customers, only:[:index, :show]
+    resources :reports, only:[:index, :show]
     resources :requests, only:[:index, :show]
     resources :tickets, except:[:new, :show]
   end
@@ -22,7 +21,7 @@ Rails.application.routes.draw do
 
   namespace :users do
   	resources :customers, except:[:new, :create] do
-      resources :reports, only:[:create]
+      resources :reports, only:[:new, :create]
     end
   	resources :requests do
   		resources :participants, only:[:create, :destroy]
