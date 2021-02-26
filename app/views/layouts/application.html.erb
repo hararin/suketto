@@ -24,7 +24,7 @@
               <li class="nav-item">
                 <%= link_to "マイページ", users_customer_path(current_user), class: "nav-link" %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">助っ人依頼</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <%= link_to "依頼一覧", users_requests_path, class: "dropdown-item" %><br>
@@ -65,10 +65,6 @@
         </div>
       </nav>
     </div>
-
     <%= yield %>
-    <footer id="footer">
-      Copyright © 2020 SHAKE Inc.
-    </footer>
   </body>
 </html>

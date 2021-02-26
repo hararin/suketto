@@ -3,10 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .error-message {
-  background-color: #fff;
   padding: 5px;
   margin-bottom: 15px;
-  border: 2px solid red;
+  color: red;
 }
 
 .form {
@@ -17,7 +16,7 @@
 
 .req-box {
   display: flex;
-  margin: 5px 0;
+  margin-bottom: 20px;
 }
 
 .req-text {

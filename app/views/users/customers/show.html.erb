@@ -7,107 +7,134 @@
 		</div>
 	<% end %>
 	<div class="row">
-		<div class="col-sm-9 col-md-6 offset-sm-1 offset-md-2 profile">
-			<div>
+		<div class="col-sm-8 col-md-6 offset-sm-2 offset-md-3 user">
+			<div class="user-img">
 				<%= attachment_image_tag @user, :image, :fill, 150, 150, format: 'jpeg', class: "img" %>
 			</div>
-			<div>
-				<table>
-					<tbody>
-						<tr>
-							<th>名前: </th>
-							<td><%= @user.name %></td>
-						</tr>
-						<tr>
-							<th>年齢: </th>
-							<td><%= @user.age %>歳</td>
-						</tr>
-						<tr>
-							<th>性別: </th>
-							<td>
-								<% if @user.sex == "女性" %>
-									<i class="fa fa-venus"></i>
-								<% else %>
-									<i class="fa fa-mars"></i>
-								<% end %>
-							</td>
-						</tr>
-						<% if current_user %>
-							<tr>
-								<th>保有チケット: </th>
-								<td><%= @user.ticket %>枚</td>
-							</tr>
-						<% end %>
-					</tbody>
-				</table>
+			<div class="user-info">
+				<p><%= @user.name %></p>
+				<p>
+					<% if @user.sex == "女性" %>
+						<i class="fa fa-venus" style="color: red;"></i>
+					<% else %>
+						<i class="fa fa-mars" style="color: blue;"></i>
+					<% end %>
+					<%= @user.age %>才
+				</p>
+				<p><%= @user.introduction %></p>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12 col-md-6 col-lg-5 offset-lg-1">
-			<table class="table table-bordered table-title">
-				<thead>
-					<tr>
-						<th><%= @user.name %>さんの依頼履歴</th>
-					</tr>
-				</thead>
-			</table>
-			<table class="table table-bordered">
-				<tbody>
-					<% @num = 1 %>
-					<% @requests.each do |request| %>
-						<tr>
-							<th><%= @num %></th>
-							<td><%= link_to request.title, users_request_path(request) %></td>
-							<td><%= request.datetime.strftime('%Y/%m/%d') %></td>
-							<td>
-								<% if DateTime.now > request.datetime %>
-									済
-								<% else %>
-									未
-								<% end %>
-							</td>
-						</tr>
-						<% @num = @num + 1 %>
-					<% end %>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-sm-12 col-md-6 col-lg-5">
-			<table class="table table-bordered table-title">
-				<thead>
-					<tr>
-						<th><%= @user.name %>さんの助っ人履歴</th>
-					</tr>
-				</thead>
-			</table>
-			<table class="table table-bordered">
-				<tbody>
-					<% @num = 1 %>
-					<% @participants.each do |participant| %>
-						<tr>
-							<th><%= @num %></th>
-							<td><%= link_to participant.request.title, users_request_path(participant.request) %></td>
-							<td><%= participant.request.datetime.strftime('%Y/%m/%d') %></td>
-							<td>
-								<% if DateTime.now > participant.request.datetime %>
-									済
-								<% else %>
-									未
-								<% end %>
-							</td>
-						</tr>
-						<% @num = @num + 1 %>
-					<% end %>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="row">
-		<div>
 			<% if @user.id == current_user.id %>
-				<p><%= link_to "編集する", edit_users_customer_path(@user), class: "btn btn-outline-success" %></p>
+				<%= link_to "編集する", edit_users_customer_path(@user), class: "btn btn-outline-success" %>
 			<% end %>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-sm-8 col-md-6 offset-sm-2 offset-md-3">
+			<input class="btn btn-primary" value="依頼履歴を表示" type="button" onclick="clickBtn1()" style="margin-top: 20px;"/>
+			<input class="btn btn-primary" value="助っ人履歴を表示" type="button" onclick="clickBtn2()" style="margin-top: 20px;"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-6 col-lg-5 offset-lg-1" id="user-table1">
+			<table class="table table-bordered table-title">
+				<thead>
+					<tr>
+						<th>依頼履歴</th>
+					</tr>
+				</thead>
+			</table>
+			<% if @requests.exists? %>
+				<table class="table table-bordered">
+					<tbody>
+						<% @num = 1 %>
+						<% @requests.each do |request| %>
+							<tr>
+								<th><%= @num %></th>
+								<td><%= link_to request.title, users_request_path(request) %></td>
+								<td><%= request.datetime.strftime('%Y/%m/%d') %></td>
+								<td>
+									<% if DateTime.now > request.datetime %>
+										済
+									<% else %>
+										未
+									<% end %>
+								</td>
+							</tr>
+							<% @num = @num + 1 %>
+						<% end %>
+					</tbody>
+				</table>
+			<% else %>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>依頼履歴はありません</td>
+						</tr>
+					</tbody>
+				</table>
+			<% end %>
+			<%= paginate @requests %>
+		</div>
+		<div class="col-sm-12 col-md-6 col-lg-5" id="user-table2">
+			<table class="table table-bordered table-title">
+				<thead>
+					<tr>
+						<th>助っ人履歴</th>
+					</tr>
+				</thead>
+			</table>
+			<% if @participants.exists? %>
+				<table class="table table-bordered">
+					<tbody>
+						<% @num = 1 %>
+						<% @participants.each do |participant| %>
+							<tr>
+								<th><%= @num %></th>
+								<td><%= link_to participant.request.title, users_request_path(participant.request) %></td>
+								<td><%= participant.request.datetime.strftime('%Y/%m/%d') %></td>
+								<td>
+									<% if DateTime.now > participant.request.datetime %>
+										済
+									<% else %>
+										未
+									<% end %>
+								</td>
+							</tr>
+							<% @num = @num + 1 %>
+						<% end %>
+					</tbody>
+				</table>
+			<% else %>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>助っ人履歴はありません</td>
+						</tr>
+					</tbody>
+				</table>
+			<% end %>
+			<%= paginate @participants %>
+		</div>
+	</div>
 </div>
+
+<script>
+document.getElementById("user-table1").style.display = "none";
+function clickBtn1(){
+	const table1 = document.getElementById("user-table1");
+	if (table1.style.display == "block"){
+		table1.style.display = "none";
+	} else {
+		table1.style.display = "block";
+	}
+}
+document.getElementById("user-table2").style.display = "none";
+function clickBtn2(){
+	const table2 = document.getElementById("user-table2");
+	if (table2.style.display == "block"){
+		table2.style.display = "none";
+	} else {
+		table2.style.display = "block";
+	}
+}
+</script>

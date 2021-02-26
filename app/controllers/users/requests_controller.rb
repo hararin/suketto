@@ -4,7 +4,7 @@ class Users::RequestsController < ApplicationController
 	before_action :cannot_change, only: [:edit, :update, :destroy]
 
 	def index
-		@requests = Request.page(params[:page]).per(5)
+		@requests = Request.page(params[:page]).per(10)
 	end
 
 	def new
@@ -18,7 +18,7 @@ class Users::RequestsController < ApplicationController
 				current_user.update(ticket: current_user.ticket - params[:request][:capacity].to_i)
 				redirect_to users_requests_path
 			else
-				render :new
+				redirect_to new_users_request_path, flash: { error: "依頼内容を入力してください。" }
 			end
 		else
 			redirect_to new_users_request_path, flash: { error: "助っ人チケットが不足しています" }

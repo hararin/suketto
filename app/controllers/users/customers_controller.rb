@@ -8,8 +8,8 @@ class Users::CustomersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@participants = @user.participants.all
-		@requests = @user.requests.all
+		@participants = @user.participants.page(params[:page]).per(5)
+		@requests = @user.requests.page(params[:page]).per(5)
 	end
 
 	def edit
@@ -21,7 +21,7 @@ class Users::CustomersController < ApplicationController
 		if @user.update(user_params)
 			redirect_to users_customer_path(current_user)
 		else
-			render :edit
+			redirect_to edit_users_customer_path(@user), flash: { error: "ユーザー情報を入力してください。" }
 		end
 	end
 
@@ -31,6 +31,6 @@ class Users::CustomersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:name, :age, :sex, :image)
+		params.require(:user).permit(:name, :age, :sex, :image, :introduction)
 	end
 end

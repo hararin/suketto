@@ -1,15 +1,69 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-8 profile">
-			<div>
-				<%= attachment_image_tag @user, :image, :fill, 100, 100, format: 'jpeg' %>
-			</div>
-			<div>
-				<p><%= @user.ticket %></p>
-				<p><%= @user.name %></p>
-				<p><%= @user.age %></p>
-				<p><%= @user.sex %></p>
-			</div>
+		<div class="col-sm-12 col-md-6">
+			<table class="table table-bordered table-title ">
+				<thead>
+					<tr>
+						<th><%= @user.name %>さんのプロフィール</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>ユーザーID</th>
+						<td><%= @user.id %></td>
+					</tr>
+					<tr>
+						<th>名前</th>
+						<td><%= @user.name %></td>
+					</tr>
+					<tr>
+						<th>性別</th>
+						<td><%= @user.sex %></td>
+					</tr>
+					<tr>
+						<th>年齢</th>
+						<td><%= @user.age %>才</td>
+					</tr>
+					<tr>
+						<th>保有チケット</th>
+						<td><%= @user.ticket %>枚</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<table class="table table-bordered table-title">
+				<thead>
+					<tr>
+						<th>チケット購入履歴</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>チケットID</th>
+						<th>購入数</th>
+						<th>請求額</th>
+						<th>購入日</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @purchases.each do |purchase| %>
+						<tr>
+							<th><%= purchase.id %></th>
+							<td><%= purchase.ticket_id %></td>
+							<td><%= purchase.quantity %></td>
+							<td><%= purchase.charge %></td>
+							<td><%= purchase.created_at %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<%= paginate @purchases %>
 		</div>
 	</div>
 	<div class="row">
@@ -17,45 +71,55 @@
 			<table class="table table-bordered table-title">
 				<thead>
 					<tr>
-						<th><%= @user.name %>さんの依頼履歴</th>
+						<th>依頼履歴</th>
 					</tr>
 				</thead>
 			</table>
 			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>依頼日</th>
+					</tr>
+				</thead>
 				<tbody>
-					<% @num = 1 %>
 					<% @requests.each do |request| %>
 						<tr>
-							<th><%= @num %></th>
-							<td><%= link_to request.title, admins_request_path(request) %></td>
+							<td><%= link_to request.id, admins_request_path(request) %></td>
 							<td><%= request.datetime %></td>
 						</tr>
-						<% @num = @num + 1 %>
 					<% end %>
 				</tbody>
 			</table>
+			<%= paginate @requests %>
 		</div>
 		<div class="col-sm-12 col-md-6">
 			<table class="table table-bordered table-title">
 				<thead>
 					<tr>
-						<th><%= @user.name %>さんの助っ人履歴</th>
+						<th>助っ人履歴</th>
 					</tr>
 				</thead>
 			</table>
 			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>依頼ID</th>
+						<th>依頼日</th>
+					</tr>
+				</thead>
 				<tbody>
-					<% @num = 1 %>
 					<% @participants.each do |participant| %>
 						<tr>
-							<th><%= @num %></th>
-							<td><%= link_to participant.request.title, admins_request_path(participant.request) %></td>
-							<td><%= participant.request.datetime %></td>
+							<th><%= participant.id %></th>
+							<td><%= link_to participant.request.id, admins_request_path(participant.request) %></td>
+							<td><%= participant.request.created_at %></td>
 						</tr>
-						<% @num = @num + 1 %>
 					<% end %>
 				</tbody>
 			</table>
+			<%= paginate @participants %>
 		</div>
 	</div>
 </div>

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
-    resources :customers, only:[:index, :show]
+    resources :customers, only:[:index, :show] do
+      resources :reports, only:[:index, :show]
+    end
     resources :requests, only:[:index, :show]
     resources :tickets, except:[:new, :show]
   end
@@ -19,7 +21,9 @@ Rails.application.routes.draw do
   get '/about' => 'home#about'
 
   namespace :users do
-  	resources :customers, except:[:new, :create]
+  	resources :customers, except:[:new, :create] do
+      resources :reports, only:[:create]
+    end
   	resources :requests do
   		resources :participants, only:[:create, :destroy]
   	end

@@ -42,6 +42,10 @@
             <th>募集人数</th>
             <td><%= @request.capacity %></td>
           </tr>
+          <tr>
+            <th>募集締切日時</th>
+            <td><%= @request.deadline %></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -68,7 +72,7 @@
           <% @participants.each do |participant| %>
             <tr>
               <th><%= @num %></th>
-              <td><%= participant.user.name %></td>
+              <td><%= link_to participant.user.name, admins_customer_path(participant.user) %></td>
             </tr>
             <% @num = @num + 1 %>
           <% end %>
@@ -80,7 +84,6 @@
 
 <script type="text/javascript">
   function initMap() {
-// latitude、longitudeから位置を特定
     var test ={lat: <%= @request.latitude %>, lng: <%= @request.longitude %>};
     var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 15,
@@ -93,8 +96,6 @@
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
-
-//Map上の指定した位置にピンを挿して表示する
     var marker = new google.maps.Marker({
                   position:test,
                   map: map,
@@ -106,15 +107,10 @@
      });
   }
 </script>
-
-<!-- 以下の記述の中にあるYOUR_API_KEYには取得したご自身のAPIキーを記述してください -->
 <script async defer
               src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
 </script>
-<!-- 表示するmapのcssです。ご自身でカスタマイズしてください。高さが設定されていないと表示されないことがあります。 -->
 <style type="text/css">
   #map { height: 200px;
          width: 100%;}
 </style>
-
-<!-- mapの表示 -->

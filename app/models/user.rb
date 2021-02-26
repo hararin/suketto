@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :requests, dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :purchases
+  has_many :reports
 
   validates :name, presence: true
   validates :age, presence: true

@@ -1,7 +1,7 @@
 <div class="container">
 	<% if flash[:error] %>
 		<div class="error-message">
-			<%= flash[:error] %>
+			<i class="fa fa-exclamation-circle"></i><%= flash[:error] %>
 		</div>
 	<% end %>
 	<div class="row">
@@ -36,8 +36,8 @@
 			    </div>
 			    <div class="form-group row">
 			    	<%= f.label :"募集人数", class: "col-sm-4 control-label" %>
-				    <div class="col-sm-8">
-						<%= f.text_field :capacity, class: "form-control" %>
+				    <div class="col-sm-3">
+						<%= f.select :capacity, options_for_select((1..99).to_a), class: "form-control" %>
 					</div>
 					<div class="caution">
 						<p>＊募集人数を変更した場合、変更前と変更後の差分のチケットが消費または返還されます。</p>

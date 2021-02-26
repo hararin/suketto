@@ -5,19 +5,21 @@
 .notice-message {
 	padding: 5px;
 	margin-bottom: 15px;
-	border: 2px solid green;
+	color: green;
 }
 
-.profile {
-	background-color: #fff;
-	padding: 5px;
-	margin-bottom: 20px;
-	border-radius: 5px;
-	display: flex;
-	table {
-		margin-left: 20px;
-		td {
-			padding: 5px;
+.user {
+	.user-img {
+		margin-bottom: 15px;
+	}
+	.user-info {
+		margin-bottom: 15px;
+		p {
+			margin: 5px 0;
 		}
 	}
+}
+
+.table-title {
+	margin-top: 20px;
 }
