@@ -48,6 +48,9 @@
                 <%= link_to "チケット一覧", admins_tickets_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
+                <%= link_to "通報一覧", admins_reports_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-danger" %>
               </li>
             <% else %>

@@ -38,24 +38,15 @@ class Users::RequestsController < ApplicationController
 
 	def update
 		difference = params[:request][:capacity].to_i - @request.capacity
-		if difference >= 0
-			if current_user.ticket >= difference
-				if @request.update(request_params)
-					current_user.update(ticket: current_user.ticket - difference)
-					redirect_to users_request_path(@request)
-				else
-					render :edit
-				end
-			else
-				redirect_to edit_users_request_path(@request), flash: { error: "チケットが不足しています。" }
-			end
-		else
+		if current_user.ticket >= difference
 			if @request.update(request_params)
 				current_user.update(ticket: current_user.ticket - difference)
 				redirect_to users_request_path(@request)
 			else
 				render :edit
 			end
+		else
+			redirect_to edit_users_request_path(@request), flash: { error: "チケットが不足しています。" }
 		end
 	end
 

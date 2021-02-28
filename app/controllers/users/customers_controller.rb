@@ -18,7 +18,7 @@ class Users::CustomersController < ApplicationController
 		if @user.update(user_params)
 			redirect_to users_customer_path(current_user)
 		else
-			redirect_to edit_users_customer_path(@user), flash: { error: "ユーザー情報を入力してください。" }
+			render :edit
 		end
 	end
 

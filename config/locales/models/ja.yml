@@ -18,3 +18,5 @@ ja:
       purchase:
         name: 購入するチケット
         quantity: 購入数
+      report:
+        content: 通報理由

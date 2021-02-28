@@ -6,6 +6,8 @@ class Admins::ReportsController < ApplicationController
 
 	def show
 		@report = Report.find(params[:id])
+		@respondent = User.find(@report.respondent_id)
+		@reports = Report.where(respondent_id: @report.respondent_id)
 	end
 
 end

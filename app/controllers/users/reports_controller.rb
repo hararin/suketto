@@ -16,7 +16,7 @@ class Users::ReportsController < ApplicationController
 		if @report.save
 			redirect_to users_customer_path(@respondent), flash: { notice: "#{@respondent.name}さんを通報しました。" }
 		else
-			redirect_to new_users_customer_report_path(@respondent), flash: { error: "通報内容を入力してください。" }
+			render :new
 		end
 	end
 

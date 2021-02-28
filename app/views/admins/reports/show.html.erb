@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>通報者</th>
+						<td><%= link_to @report.user.name, admins_customer_path(@report.user) %></td>
+					</tr>
+					<tr>
+						<th>通報相手</th>
+						<td><%= link_to @respondent.name, admins_customer_path(@respondent) %></td>
+					</tr>
+					<tr>
+						<th>通報理由</th>
+						<td><%= @report.content %></td>
+					</tr>
+					<tr>
+						<th>通報日時</th>
+						<td><%= @report.created_at %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered table-title">
+				<thead>
+					<tr>
+						<th><%= @respondent.name %>さんへの通報一覧</th>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>通報者</th>
+						<th>通報日時</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @reports.each do |report| %>
+						<tr>
+							<td><%= link_to report.id, admins_report_path(report) %></td>
+							<td><%= link_to report.user.id, admins_customer_path(report.user) %></td>
+							<td><%= report.created_at %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
