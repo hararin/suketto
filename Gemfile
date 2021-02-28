@@ -75,3 +75,4 @@ gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem "dotenv-rails"
 gem "kaminari"
+gem 'rails-i18n'

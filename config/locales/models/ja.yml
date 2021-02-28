@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        email: Eメール
+        password: パスワード
+        name: 名前
+        age: 年齢
+        sex: 性別
+      request:
+        title: タイトル
+        datetime: 日時
+        address: 住所
+        capacity: 募集人数
+        deadline: 募集締切日時
+      purchase:
+        name: 購入するチケット
+        quantity: 購入数

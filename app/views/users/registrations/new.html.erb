@@ -12,13 +12,20 @@
         </div>
         <div class="form-group row">
           <%= f.label :"年齢", class: "col-3 col-form-label" %>
-          <div class="col-3">
-            <%= f.text_field :age, class: "form-control" %>
-          </div>
+            <div class="col-3">
+              <%= f.select :age, options_for_select((1..99).to_a), class: "form-control" %>
+            </div>
+        </div>
+        <div class="form-group row">
           <%= f.label :"性別", class: "col-3 col-form-label" %>
-          <div class="col-3">
-            <%= f.text_field :sex, class: "form-control" %>
-          </div>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-outline-danger">
+                <%= f.radio_button :sex, "女性" %>女性
+              </label>
+              <label class="btn btn-outline-primary">
+                <%= f.radio_button :sex, "男性" %>男性
+              </label>
+            </div>
         </div>
         <div class="form-group row">
           <%= f.label :"Eメール", class: "col-3 col-form-label" %>

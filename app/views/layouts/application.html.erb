@@ -10,15 +10,15 @@
 
   <body>
     <div>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-md navbar-dark shadow-lg p-3" style="background-color: #000033">
         <a class="navbar-brand" href="/">Suketto</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/">ホーム<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/">Sukettoについて<span class="sr-only">(current)</span></a>
             </li>
             <% if current_user %>
               <li class="nav-item">
@@ -32,10 +32,10 @@
                 </div>
               </li>
               <li class="nav-item">
-                <%= link_to "チケット", users_tickets_path, class: "nav-link" %>
+                <%= link_to "チケット", new_users_purchase_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link btn btn-danger" %>
               </li>
             <% elsif current_admin %>
               <li class="nav-item">
@@ -48,17 +48,17 @@
                 <%= link_to "チケット一覧", admins_tickets_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-danger" %>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>
+                <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link btn btn-primary btn-sm" %>
               </li>
               <li class="nav-item">
-                <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+                <%= link_to "ログイン", new_user_session_path, class: "nav-link btn btn-success btn-sm" %>
               </li>
               <li class="nav-item">
-                <%= link_to "管理者ログイン", new_admin_session_path, class: "nav-link" %>
+                <%= link_to "管理者ログイン", new_admin_session_path, class: "nav-link btn btn-secondary btn-sm" %>
               </li>
             <% end %>
           </ul>
@@ -66,5 +66,10 @@
       </nav>
     </div>
     <%= yield %>
+    <footer class="footer">
+      <div class="footer-container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
   </body>
 </html>

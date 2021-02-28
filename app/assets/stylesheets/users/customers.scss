@@ -8,7 +8,21 @@
 	color: green;
 }
 
+.no-gutters {
+	margin: 0;
+	padding: 0;
+}
+
+.no-gutters {
+	.col {
+		margin: 0;
+		padding: 0;
+	}
+}
+
 .user {
+	padding-bottom: 20px;
+	background-color: #fff;
 	.user-img {
 		margin-bottom: 15px;
 	}

@@ -12,10 +12,10 @@
 			</div>
 		</div>
 	<% end %>
-	<div class="row">
-		<div class="col-sm-8 col-md-6 offset-sm-2 offset-md-3 user">
+	<div class="row no-gutters">
+		<div class="col-sm-12 col-md-6 offset-md-3 user">
 			<div class="user-img">
-				<%= attachment_image_tag @user, :image, :fill, 150, 150, format: 'jpeg', class: "img" %>
+				<%= attachment_image_tag @user, :image, format: 'jpeg', class: "img" %>
 			</div>
 			<div class="user-info">
 				<p><%= @user.name %></p>

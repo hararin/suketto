@@ -6,9 +6,10 @@
 			</div>
 		</div>
 	<% end %>
+	<%= render 'layouts/error_messages', model: @purchase %>
 	<div class="row">
 		<div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 purchase-form">
-			<%= form_with model:@purchase, url: users_purchases_path do |f| %>
+			<%= form_with model:@purchase, local:true, url: users_purchases_path do |f| %>
 				<p>(1)購入するチケットと購入数を選択してください</p>
 				<div>
 					<%= f.collection_select :ticket_id, @tickets, :id, :name, prompt: "購入するチケット" %> <%= f.select :quantity, [1, 2, 3, 4, 5], prompt: "購入数" %>

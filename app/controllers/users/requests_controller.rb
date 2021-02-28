@@ -19,7 +19,7 @@ class Users::RequestsController < ApplicationController
 				current_user.update(ticket: current_user.ticket - params[:request][:capacity].to_i)
 				redirect_to users_requests_path
 			else
-				redirect_to new_users_request_path, flash: { error: "依頼内容を入力してください。" }
+				render :new
 			end
 		else
 			redirect_to new_users_request_path, flash: { error: "助っ人チケットが不足しています" }
