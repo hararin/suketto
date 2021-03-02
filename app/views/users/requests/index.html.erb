@@ -1,16 +1,24 @@
 <div class="container">
-	<% @requests.each do |request| %>
-		<%= link_to users_request_path(request) do %>
-			<div class="col-sm-12 req-box">
+	<div class="row">
+		<div class="col-sm-6 offset-sm-3">
+			<h1>REQUESTS</h1>
+		</div>
+	</div>
+	<div class="row d-flex flex-wrap">
+		<% @requests.each do |request| %>
+			<div class="req-box col-12 col-md-6 offset-md-0">
 				<div class="req-img">
-					<%= attachment_image_tag request, :image, :fill, 150, 100, format: 'jpg', fallback: "1560031.jpg", size: '130x100' %><br>
+					<%= attachment_image_tag request, :image, :fill, 150, 100, format: 'jpg', fallback: "1560031.jpg", size: '130x100' %>
+					<p>依頼者:<%= link_to request.user.name, users_customer_path(request.user) %></p>
 				</div>
 				<div class="req-text">
-					<p><%= request.title %></p>
-					<p><%= request.content %></p>
+					<p class="title"><%= link_to request.title, users_request_path(request) %></p>
+					<p class="content"><%= request.content %></p>
+					<p class="req-info"><%= request.participants.count %>/<%= request.capacity %> <%= request.created_at %></p>
 				</div>
 			</div>
 		<% end %>
-	<% end %>
+	</div>
+
 	<%= paginate @requests %>
 </div>

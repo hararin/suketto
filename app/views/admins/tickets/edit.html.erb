@@ -1,25 +1,23 @@
 <div class="container">
 	<div class="row">
-		<div class="col-6 offset-3">
+		<div class="col-12 col-md-8 offset-md-2 ticket-form">
 			<%= form_with model: @ticket, url: admins_ticket_path(@ticket) do |f| %>
 			    <div class="form-group row">
-			        <%= f.label :"名前", class: "col-4 col-form-label" %>
-			        <div class="col-8">
+			        <%= f.label :"名前", class: "col-3 col-form-label" %>
+			        <div class="col-6">
 		            	<%= f.text_field :name, class: "form-control" %>
 	            	</div>
 			    </div>
 			    <div class="form-group row">
-	        		<%= f.label :"枚数(枚)", class: "col-4 col-form-label" %>
-	      			<div class="col-8">
-	      				<%= f.text_field :quantity, class: "form-control" %>
-	      			</div>
-	      		</div>
-	        	<div class="form-group row">
-	        		<%= f.label :"価格(円)", class: "col-4 col-form-label" %>
-	      			<div class="col-8">
-	      				<%= f.text_field :price, class: "form-control" %>
-	      			</div>
-	      		</div>
+			        <%= f.label :"枚数", class: "col-3 col-form-label" %>
+			        <div class="col-1">
+						<%= f.select :quantity, options_for_select((1..99).to_a), class: "form-control" %>
+					</div>
+					<%= f.label :"価格(円)", class: "col-3 col-form-label" %>
+			        <div class="col-2">
+		            	<%= f.text_field :price, class: "form-control" %>
+	            	</div>
+			    </div>
 			    <div class="actions">
 			        <%= f.submit "更新する", class: "btn btn-success" %>
 			    </div>

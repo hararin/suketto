@@ -1,7 +1,16 @@
-<%= render 'layouts/error_messages', model: @user %>
 <div class="container">
-	<div class="row edit-user-form">
-		<div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <h1>EDIT USER</h1>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3">
+        <%= render 'layouts/error_messages', model: @user %>
+      </div>
+  </div>
+	<div class="row">
+		<div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3 edit-user-form">
 			<%= form_with model: @user, local: true, url: users_customer_path(@user) do |f| %>
 			    <div class="form-group row">
 			        <%= f.label :"*名前", class: "col-3 col-form-label" %>

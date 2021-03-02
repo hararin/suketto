@@ -1,5 +1,14 @@
 <div class="container">
-	<%= render 'layouts/error_messages', model: @report %>
+	<div class="row">
+		<div class="col-6 offset-3">
+			<h1>REPORT</h1>
+		</div>
+	</div>
+	<div class="row">
+	    <div class="col-12 col-md-8 offset-md-2">
+	    	<%= render 'layouts/error_messages', model: @report %>
+	    </div>
+	</div>
 	<div class="row">
 		<div class="col-12 col-md-8 offset-md-2 report-form">
 			<p>以下のユーザーを通報します。</p>

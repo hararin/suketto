@@ -135,9 +135,13 @@
 	<div class="row">
 		<div class="col-6 offset-3">
 			<% if @user.is_banned == true %>
-				<%= link_to "アカウント停止を解除する", admins_unban_path(@user), class: "btn btn-primary", method: :patch %>
+				<%= link_to "アカウント停止を解除する", admins_unban_path(@user), class: "btn btn-primary", method: :patch, data: { confirm: "<i class='fa fa-exclamation-circle'></i>本当にアカウント停止を解除しますか？",
+                                cancel: "戻る",
+                                commit: '解除する' } %>
 			<% else %>
-				<%= link_to "アカウントを停止する", admins_path(@user), class: "btn btn-danger", method: :patch %>
+				<%= link_to "アカウントを停止する", admins_path(@user), class: "btn btn-danger", method: :patch, data: { confirm: "<i class='fa fa-exclamation-circle'></i>本当にアカウントを停止しますか？",
+                                cancel: "戻る",
+                                commit: '停止する' } %>
 			<% end %>
 		</div>
 	</div>

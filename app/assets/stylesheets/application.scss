@@ -29,10 +29,19 @@
 body {
 	font-weight: bold;
 	background-color: #EEEEEE;
+	margin-bottom: 60px;
+	font-family:Impact,"MS Pゴシック",sans-serif;
 }
 
-body {
-	font-family:Impact,"MS Pゴシック",sans-serif;
+.pagination > li > a {
+  border: none;
+  color: #000;
+}
+
+
+.pagination > li > a:hover {
+  background: #000033;
+  color: #fff;
 }
 
 .nav-item {
@@ -41,6 +50,7 @@ body {
 
 table {
 	background-color: #fff;
+  border-radius: 10px;
 }
 
 .img {
@@ -67,9 +77,10 @@ table {
 	color: #fff;
 }
 
-.login-form, .signup-form, .report-form {
+.login-form, .signup-form, .report-form, .ticket-form, .edit-user-form, .purchase-form {
 	padding: 20px;
 	background-color: #fff;
+  border-radius: 10px;
 }
 
 .table-title {
@@ -79,10 +90,6 @@ table {
 html {
   position: relative;
   min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
 }
 
 .footer {

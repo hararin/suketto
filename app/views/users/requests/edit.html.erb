@@ -1,12 +1,21 @@
 <div class="container">
+	<div class="row">
+		<div class="col-6 offset-3">
+			<h1>EDIT REQUEST</h1>
+		</div>
+	</div>
 	<% if flash[:error] %>
 		<div class="error-message">
 			<i class="fa fa-exclamation-circle"></i><%= flash[:error] %>
 		</div>
 	<% end %>
-	<%= render 'layouts/error_messages', model: @request %>
 	<div class="row">
-		<div class="col-sm-10 offset-sm-1 form">
+	    <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+	    	<%= render 'layouts/error_messages', model: @request %>
+	    </div>
+	</div>
+	<div class="row">
+		<div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3 form">
 			<%= form_with model: @request, local: true, url: users_request_path(@request), class: "form-horizontal" do |f| %>
 				<div class="form-group row">
 					<%= f.label :"タイトル", class: "col-sm-4 control-label" %>
