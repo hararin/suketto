@@ -4,11 +4,13 @@
       <h1>LOGIN</h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3">
-      <%= render 'layouts/error_messages', model: @user %>
+  <% if flash[:error] %>
+    <div class="row">
+      <div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3">
+        <%= flash[:error] %>
+      </div>
     </div>
-  </div>
+  <% end %>
   <div class="row">
     <div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3 login-form">
       <%= form_for(resource, as: resource_name, local: true, url: session_path(resource_name)) do |f| %>

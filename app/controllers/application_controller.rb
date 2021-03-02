@@ -8,6 +8,34 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def any_requests_or_participants?(user)
+	    @requests = user.requests.all
+	    @req_in_progress = []
+	    @participants = user.participants.all
+	    @par_in_progress = []
+	    @requests.each do |request|
+	    	if request.datetime >= DateTime.now
+	        @req_in_progress.push(request)
+	    	end
+	    end
+	    @participants.each do |participant|
+	    	if participant.request.datetime >= DateTime.now
+	        @par_in_progress.push(participant)
+	    	end
+	    end
+	    if @req_in_progress.blank? == false
+	    	redirect_to users_customer_path(user), flash: { error: "進行中の依頼があるため退会できません。" }
+	    	return
+	    elsif @par_in_progress.blank? == false
+	    	redirect_to users_customer_path(user), flash: { error: "進行中の助っ人があるため退会できません。" }
+	    	return
+	    else
+		    @user.update(is_deleted: true)
+			reset_session
+			redirect_to '/'
+	    end
+	end
+
 	protected
 
 	def configure_permitted_parameters

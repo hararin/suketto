@@ -35,6 +35,8 @@
 						<td>
 							<% if @user.is_banned == true %>
 								停止中
+							<% elsif @user.is_deleted == true %>
+								退会済み
 							<% else %>
 								通常
 							<% end %>

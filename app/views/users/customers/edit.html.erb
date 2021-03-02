@@ -54,6 +54,13 @@
       <div class="caution">
         <p>・*のついた項目は必ず入力してください。</p>
       </div>
+      <hr class="my-4">
+      <div class="caution">
+        <p>退会を希望の方はこちら</p>
+      </div>
+      <%= link_to "退会する", users_withdraw_path(@user), class: "btn btn-outline-danger btn-sm", method: :patch, data: { confirm: "<i class='fa fa-exclamation-circle'></i>本当に退会しますか？",
+                                cancel: "戻る",
+                                commit: '退会する' } %>
 		</div>
 	</div>
 </div>

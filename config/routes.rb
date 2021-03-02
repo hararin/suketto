@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get '/about' => 'home#about'
 
   namespace :users do
+    patch '/customers/:id/withdraw' => 'customers#withdraw', as: 'withdraw'
   	resources :customers, except:[:new, :create] do
       resources :reports, only:[:new, :create]
     end

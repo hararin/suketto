@@ -22,8 +22,9 @@ class Users::CustomersController < ApplicationController
 		end
 	end
 
-	def destroy
-		
+	def withdraw
+		@user = current_user
+		any_requests_or_participants?(@user)
 	end
 
 	private

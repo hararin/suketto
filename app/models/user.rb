@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :requests, dependent: :destroy
-  has_many :participants, dependent: :destroy
+  has_many :requests
+  has_many :participants
   has_many :purchases
   has_many :reports
 
@@ -17,5 +17,9 @@ class User < ApplicationRecord
   attachment :image
 
   enum sex: { 女性: 0, 男性: 1}
+
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
 
 end

@@ -6,6 +6,20 @@ class Users::SessionsController < Devise::SessionsController
     users_customer_path(resource)
   end
 
+  protected
+
+  def reject_customer
+    @user = User.find_by(email: params[:user][:email].downcase)
+    if @user
+      if (@user.valid_password?(params[:user][:password]) && (@user.active_for_authentication? == false))
+        flash[:error] = "退会済みです。"
+        redirect_to new_user_session_path
+      end
+    else
+      flash[:error] = "メールアドレスまたはパスワードが違います"
+    end
+  end
+
   # GET /resource/sign_in
   # def new
   #   super
