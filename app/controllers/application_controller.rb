@@ -15,12 +15,12 @@ class ApplicationController < ActionController::Base
 	    @par_in_progress = []
 	    @requests.each do |request|
 	    	if request.datetime >= DateTime.now
-	        @req_in_progress.push(request)
+	        	@req_in_progress.push(request)
 	    	end
 	    end
 	    @participants.each do |participant|
 	    	if participant.request.datetime >= DateTime.now
-	        @par_in_progress.push(participant)
+	        	@par_in_progress.push(participant)
 	    	end
 	    end
 	end

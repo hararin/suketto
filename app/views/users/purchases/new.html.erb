@@ -43,34 +43,36 @@
 		</div>
 	</div>
 	<div class="row" id="purchase-table">
-		<table class="table table-bordered table-title col-10 offset-1 col-sm-10 offset-sm-1 col-md-6 offset-md-3">
-			<thead>
-				<tr>
-					<th><%= current_user.name %>さんのチケット購入履歴</th>
-				</tr>
-			</thead>
-		</table>
-		<table class="table table-bordered col-10 offset-1 col-sm-10 offset-sm-1 col-md-6 offset-md-3">
-			<thead>
-				<tr>
-					<th>購入日</th>
-					<th>チケット名</th>
-					<th>購入数</th>
-					<th>請求額</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @purchases.each do |purchase| %>
+		<div class="col-10 offset-1 col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+			<table class="table table-bordered table-title ">
+				<thead>
 					<tr>
-						<td><%= purchase.created_at.strftime('%Y/%m/%d') %></td>
-						<td><%= purchase.ticket.name %></td>
-						<td><%= purchase.quantity %></td>
-						<td><%= purchase.charge %></td>
+						<th><%= current_user.name %>さんのチケット購入履歴</th>
 					</tr>
-				<% end %>
-			</tbody>
-		</table>
-		<%= paginate @purchases %>
+				</thead>
+			</table>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>購入日</th>
+						<th>チケット名</th>
+						<th>購入数</th>
+						<th>請求額</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @purchases.each do |purchase| %>
+						<tr>
+							<td><%= purchase.created_at.strftime('%Y/%m/%d') %></td>
+							<td><%= purchase.ticket.name %></td>
+							<td><%= purchase.quantity %></td>
+							<td><%= purchase.charge %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<%= paginate @purchases %>
+		</div>
 	</div>
 </div>
 <script>

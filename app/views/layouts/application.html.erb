@@ -71,7 +71,11 @@
     <%= yield %>
     <footer class="footer">
       <div class="footer-container">
-        <p class="text-muted">Place sticky footer content here.</p>
+        <% if current_user %>
+          <p class="text-muted"><%= link_to "Sukettoについて", about_path, class: "footer-link" %> <%= link_to "マイページ", users_customer_path(current_user), class: "footer-link" %> <%= link_to "依頼一覧", users_requests_path, class: "footer-link" %> <%= link_to "依頼投稿", new_users_request_path, class: "footer-link" %> <%= link_to "チケット購入", new_users_purchase_path, class: "footer-link" %></p>
+        <% else %>
+          <p class="text-muted"><%= link_to "Sukettoについて", about_path, class: "footer-link" %> <%= link_to "ログイン", new_user_session_path, class: "footer-link" %> <%= link_to "ユーザー登録", new_user_registration_path, class: "footer-link" %> <%= link_to "管理者ログイン", new_admin_session_path, class: "footer-link" %></p>
+        <% end %>
       </div>
     </footer>
   </body>

@@ -19,7 +19,12 @@ class Admins::CustomersController < ApplicationController
 				request.ticket_return_ban(request)
 				request.destroy
 			end
-		else
+		end
+		if @par_in_progress.blank? == false
+			@par_in_progress.each do |participant|
+				participant.user.update(ticket: participant.user.ticket - 1)
+				participant.destroy
+			end
 		end
 		@user.update(is_banned: true)
 		redirect_to admins_customer_path(@user)

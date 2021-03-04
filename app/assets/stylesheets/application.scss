@@ -102,9 +102,21 @@ html {
 }
 .footer-container {
   width: auto;
-  max-width: 680px;
   padding: 0 15px;
 }
 .footer-container .text-muted {
+  text-align: center;
   margin: 20px 0;
+}
+
+.footer-link {
+  font-size: 8px;
+  color: gray;
+  margin: 0 5px;
+}
+
+.footer-link:hover {
+  font-size: 8px;
+  color: #fff;
+  text-decoration: none;
 }
