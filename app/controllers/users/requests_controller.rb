@@ -64,8 +64,12 @@ class Users::RequestsController < ApplicationController
 
 	def cannot_change
 		@request = Request.find(params[:id])
-		if DateTime.now >= @request.datetime
-			redirect_to users_request_path(@request), flash: { error: "依頼が終了しているため変更できません" }
+		if @request.user == current_user
+			if DateTime.now >= @request.datetime
+				redirect_to users_request_path(@request), flash: { error: "依頼が終了しているため変更できません。" }
+			end
+		else
+			redirect_to users_request_path(@request), flash: { error: "依頼者以外は変更できません。" }
 		end
 	end
 

@@ -1,33 +1,33 @@
-<div class="jumbotron">
-  <h1>Sukettoについて</h1>
-</div>
-<div class="container">
-	<a id="about"><h3>こんな事ってありませんか？</h3></a>
+<div class="container about">
 	<div class="row">
-		<div class="col-sm-12 col-md-5 col-lg-5">
-			<div class="row">
-				<div class="col-12 img-box1"></div>
-				<div class="col-12 explanation">
-					<p><strong>「急な予定のキャンセルで人数が足りない...」</strong></p>
-					<p><strong>「思ったより人数が集まらなかったなぁ...」</strong></p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-12 col-md-5 offset-md-2 col-lg-5 offset-lg-2">
-			<div class="row">
-				<div class="col-12 img-box2"></div>
-				<div class="col-12 explanation">
-					<p><strong>「やることなくて暇だなぁ...」</strong></p>
-					<p><strong>「どこかに遊びに行きたいなぁ...」</strong></p>
-				</div>
-			</div>
+		<div class="jumbotron" style="background-color: #fff">
+		  <h1 class="display-4">Suketto</h1>
+		  <p>「人手が足りなくて困った、、、」「誰かに用事を手伝って欲しい、、、」こんなことってありませんか？そんな時に頼りになるのが"Suketto"!手伝って欲しい用事について依頼を出すことで、心優しい誰かが助っ人としてその用事を手伝ってくれるかもしれません。また、依頼を出すだけでなく、助っ人として相手の依頼を手伝ってあげることもできます。「お互いに助け合う」ということが"Suketto"の主な目的です。</p>
+		  <hr class="my-4">
+		  <div class="usage">
+		  	<p>"Suketto"の利用方法</p>
+			<p>①助っ人依頼の投稿<br>依頼の投稿には、「助っ人チケット」というチケットが、募集人数一人につき一枚必要となります。<br>依頼投稿後、依頼を編集することはできますが、募集人数を変更した場合は、変更前との人数差分のチケットが消費または追加されます。<br>また、依頼を削除することもできます。その際、募集人数分のチケットが返還され、助っ人登録者については、助っ人登録時に追加されたチケットが消費されます。</p>
+			<p>②助っ人登録<br>助っ人として登録したい依頼があれば、依頼詳細ページから助っ人登録をすることができます。助っ人として登録することで「助っ人チケット」が一枚追加されます。<br>助っ人登録をキャンセルする場合は、助っ人登録時に追加されたチケット一枚が消費されます。チケットが不足している場合はキャンセルすることができません。ご注意ください。</p>
+			<p>③チケット購入<br>チケットはチケット購入ページから「クレジットカード」または「銀行振込」によって購入することができます。購入後、返品をすることはできません。ご了承ください。</p>
+		  </div>
+		  <hr class="my-4">
+		  <div>
+			  <p>＊注意事項＊</p>
+			  <p>①通報<br>依頼もしくは助っ人登録をしたにもかかわらず予定を無断でキャンセルされるなどの迷惑行為があった場合は、そのユーザーの詳細ページから通報をすることができます。<br>虚偽の通報も迷惑行為に該当する場合があるのでご注意ください。</p>
+			  <p>②アカウント停止<br>管理人の判断によってそのユーザーのアカウントを停止する場合があります。<br>アカウントを停止されたユーザーは、進行中の依頼とその助っ人登録、または助っ人登録が自動で削除されます。停止されたユーザーは、依頼中の依頼の募集人数分のチケットが返還され、登録中の助っ人の登録時に追加されたチケット一枚が消費されます。停止されたユーザーの依頼の助っ人登録者に関してはチケットの枚数の変動はありません。ご安心ください。</p>
+			  <p>③退会<br>ユーザーの編集ページから退会することができます。退会前には、進行中の依頼または助っ人登録がないことを確認してください。<br>退会後は同じメールアドレスでの登録はできません。ご了承ください。</p>
+		  </div>
+		  	<% if not current_user %>
+			  	<hr class="my-4">
+			  	<div class="about-btn">
+			  		<p>このサイトの利用には会員登録・ログインが必要です。</p>
+					<%= link_to "会員登録", new_user_registration_path, class: "btn btn-outline-primary" %>
+					<%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-success" %>
+			  	</div>
+		    <% end %>
 		</div>
 	</div>
-	<hr class="my-4">
-
-	<% if not current_user %>
-	<p>このサイトの利用には会員登録・ログインが必要です。</p>
-		<%= link_to "会員登録", new_user_registration_path, class: "btn btn-outline-primary" %>
-		<%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-success" %>
-    <% end %>
 </div>
+
+
+

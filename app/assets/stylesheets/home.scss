@@ -7,6 +7,7 @@
 }
 
 .home {
+	text-align: left;
 	height: 800px;
 	background-image: url(4481879_m.jpg);
 	background-position: center;
@@ -21,14 +22,6 @@
 	}
 }
 
-div {
-	text-align: center;
-}
-
-.explanation {
-	margin : 0;
-}
-
 .container {
 	h2 {
 	margin-bottom: 40px;
@@ -36,18 +29,10 @@ div {
 	}
 }
 
-.img-box1 {
-	height: 250px;
-	background-image: url(3221923_s.jpg);
-	background-position: center;
-	background-repeat: no-repeat;
-	margin-bottom: 20px;
+.about {
+	text-align: left;
 }
 
-.img-box2 {
-	height: 250px;
-	background-image: url(1683130_s.jpg);
-	background-position: center;
-	background-repeat: no-repeat;
-	margin-bottom: 20px;
+.about-btn {
+	text-align: center;
 }
