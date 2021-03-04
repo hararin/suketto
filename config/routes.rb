@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   	sessions: 'users/sessions'
   }
 
-  get '/' => 'home#top'
+  root 'home#top'
   get '/about' => 'home#about'
 
   namespace :users do
