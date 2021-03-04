@@ -41,7 +41,7 @@ class Users::RequestsController < ApplicationController
 		if current_user.ticket >= difference
 			if @request.update(request_params)
 				current_user.update(ticket: current_user.ticket - difference)
-				redirect_to users_request_path(@request)
+				redirect_to users_request_path(@request), flash: { notice: "依頼内容を更新しました。" }
 			else
 				render :edit
 			end
@@ -51,9 +51,9 @@ class Users::RequestsController < ApplicationController
 	end
 
 	def destroy
-		@request.ticket_return(@request)
+		@request.ticket_return_destroy(@request)
 		@request.destroy
-		redirect_to users_requests_path
+		redirect_to users_customer_path(current_user), flash: { error: "依頼を削除し、募集人数分のチケットが返還されました。" }
 	end
 
 	private

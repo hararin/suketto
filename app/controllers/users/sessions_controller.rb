@@ -2,6 +2,9 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+
+  before_action :reject_customer, only: [:create]
+
   def after_sign_in_path_for(resource)
     users_customer_path(resource)
   end
@@ -16,7 +19,7 @@ class Users::SessionsController < Devise::SessionsController
         redirect_to new_user_session_path
       end
     else
-      flash[:error] = "メールアドレスまたはパスワードが違います"
+      flash[:error] = "メールアドレスまたはパスワードが違います。"
     end
   end
 

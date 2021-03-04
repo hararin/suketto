@@ -7,6 +7,9 @@ class Users::CustomersController < ApplicationController
 		@user = User.find(params[:id])
 		@participants = @user.participants.page(params[:page]).per(5)
 		@requests = @user.requests.page(params[:page]).per(5)
+		@requests.each do |request|
+			request.ticket_return(request)
+		end
 	end
 
 	def edit
@@ -25,6 +28,17 @@ class Users::CustomersController < ApplicationController
 	def withdraw
 		@user = current_user
 		any_requests_or_participants?(@user)
+		if @req_in_progress.blank? == false
+	    	redirect_to users_customer_path(@user), flash: { error: "進行中の依頼があるため退会できません。" }
+	    	return
+	    elsif @par_in_progress.blank? == false
+	    	redirect_to users_customer_path(@user), flash: { error: "進行中の助っ人があるため退会できません。" }
+	    	return
+	    else
+		    @user.update(is_deleted: true)
+			reset_session
+			redirect_to '/'
+	    end
 	end
 
 	private

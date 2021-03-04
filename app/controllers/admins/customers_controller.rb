@@ -13,6 +13,14 @@ class Admins::CustomersController < ApplicationController
 
 	def ban
 		@user = User.find(params[:id])
+		any_requests_or_participants?(@user)
+		if @req_in_progress.blank? == false
+			@req_in_progress.each do |request|
+				request.ticket_return_ban(request)
+				request.destroy
+			end
+		else
+		end
 		@user.update(is_banned: true)
 		redirect_to admins_customer_path(@user)
 	end
