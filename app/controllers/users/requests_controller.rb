@@ -1,7 +1,7 @@
 class Users::RequestsController < ApplicationController
 
 	before_action :authenticate_user!, except: :index
-	before_action :is_banned
+	before_action :is_banned, except: [:index, :show]
 	before_action :cannot_change, only: [:edit, :update, :destroy]
 
 	def index

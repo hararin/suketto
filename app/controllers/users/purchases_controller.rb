@@ -1,7 +1,7 @@
 class Users::PurchasesController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :is_banned
+	before_action :is_banned, only: :create
 
 	def new
 		@tickets = Ticket.all

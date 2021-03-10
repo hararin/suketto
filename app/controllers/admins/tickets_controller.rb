@@ -1,5 +1,7 @@
 class Admins::TicketsController < ApplicationController
 
+	before_action :authenticate_admin!
+
 	def index
 		@tickets = Ticket.all
 		@ticket = Ticket.new
