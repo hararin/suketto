@@ -18,8 +18,6 @@ class User < ApplicationRecord
 
   enum sex: { 女性: 0, 男性: 1}
 
-  def active_for_authentication?
-    super && (self.is_deleted == false)
-  end
+  include Discard::Model
 
 end

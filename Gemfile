@@ -81,6 +81,7 @@ gem 'bootstrap-sass'
 gem "dotenv-rails"
 gem "kaminari"
 gem 'rails-i18n'
+gem "discard"
 group :production do
   gem 'pg'
   gem 'rails_12factor'

@@ -35,7 +35,7 @@ class Users::CustomersController < ApplicationController
 	    	redirect_to users_customer_path(@user), flash: { error: "進行中の助っ人があるため退会できません。" }
 	    	return
 	    else
-		    @user.update(is_deleted: true)
+		    @user.discard
 			reset_session
 			redirect_to '/'
 	    end
